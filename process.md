@@ -228,3 +228,61 @@ Tracks decisions, results, and notes as we execute the plan.
 - **3 distinct exfiltration mechanisms observed** — Discord webhook (Vercel site), form POST (roblox-com.pl), Discord OAuth redirect (roblox.com.ge). Phase 2 content analysis will map these fully.
 - **`eggywall.cc` is a phishing infrastructure service** — custom nameservers, `Apache/2.4.52 (Ubuntu)` with custom `Eggy-Wall: 10.0.0` header and `Abuse: abuse@eggywall.cc` contact. Worth deeper investigation.
 - **delta-executor.club is the most commercially operated** — Google Ads, GA4, Cloudflare Email Routing, Porkbun registration, all within 9 days of domain creation. This is a business, not a hobbyist.
+
+---
+
+## Phase 2: Page Content Analysis — COMPLETE (Feb 7, 2026)
+
+### Tools Used
+
+| Tool | Purpose | Notes |
+|------|---------|-------|
+| `curl -s -L` | Live HTML fetch (3 domains) | With realistic User-Agent header |
+| urlscan.io DOM API | Recovered archived HTML (all 5 domains) | `urlscan.io/dom/<scan-id>/` endpoints |
+| urlscan.io search API | Found scan IDs for roblox-com.pl and roblox.com.ge | 10 scans found for roblox-com.pl, 5 for roblox.com.ge |
+| Manual HTML/JS analysis | Content analysis per domain | Forms, exfiltration, JS behavior, social engineering |
+
+### Results
+
+**5 domain teardown JSONs updated** with `content_analysis` sections.
+
+| Domain | HTML Size | Page Type | Key Content Finding |
+|--------|----------|-----------|-------------------|
+| `roblox-com.pl` | 4,694 B (urlscan DOM, gzip) | Login clone | 28 local CSS files, 3 credential vectors (Log In + "Email Code" + "Use Another Device" all submit the form), exfil JS hidden in `css/` directory (`oefdspofrewoisfewfewfw02349.js`), Polish comments, empty FunCaptcha callback. TLS cert renewed Jan 2026 *after* content was removed — infra still maintained. |
+| `vercel.app` site | 15,243 B | Login clone (French) | **Dual Discord webhook**: one for credentials (on submit), one for **passive visitor beacon** (on every page load). 7 anti-analysis techniques including debugger timing oracle. Fake error message ("wrong password") on webhook failure to encourage retries. Zero obfuscation — all plaintext with French comments. |
+| `delta-executor.club` | 206,720 B | Malware download | **Next.js App Router + React Server Components + shadcn/ui**. Download URLs completely absent from HTML — injected at runtime via JS hydration (evades static analysis). GTM container `GTM-K4TKHCNL` (new finding). Chinese code comment (`// 配置 Google Ads`). OG image alt text says "Font Changer" — **template reuse from unrelated site**. 6 fake testimonials, "Antivirus Warnings" dismissal section, Storbix CDN for images. |
+| `rbux4aall.netlify.app` | 15,012 B | Robux generator (CPA fraud) | **XF Content Locker** kit identified (operator ID `4507479`, key `86cfc`). Two-stage JS architecture: static HTML contains config, CloudFront-hosted JS injects full scam modal at runtime. 7-step funnel ending at CPA offer wall. Hardcoded default text reveals operator name/alias **"amjad"**. Bot detection via `histaWts.com` (0 bytes to crawlers). 6 platforms used (all free tier). |
+| `roblox.com.ge` | 63,957 B | Reverse proxy → Discord OAuth | **Live reverse proxy** to real roblox.com (not a static clone). Only 3 elements injected: secret meta tag (Discord snowflake `1405351214488189`), modified login href, and ~30-line script. **Client-capability detection**: serves benign 404 to simple HTTP clients, full malicious payload to browsers. Fake "playing" status via `setInterval` + click hijack on "Join Experience" button. Path validation: bare domain=403, `/games/`=requires privateServerLinkCode. |
+
+### Decisions Made
+
+1. **roblox-com.pl recovered via urlscan DOM** — scan `019c2a0a-cefb-7150-97f7-64989c25c494` (Feb 4, 2026) provided the complete DOM. The exfiltration JS file (`css/oefdspofrewoisfewfewfw02349.js`) was not captured in the DOM snapshot — this is a known limitation of urlscan DOM recovery (external JS files aren't inlined). The exfil endpoint (webhook/server) remains unknown.
+2. **roblox.com.ge path-based fetch worked** — `/users/1/profile` returned 63,957 bytes. Games path returned "privateServerLinkCode Required." (31 bytes), confirming path validation by the eggywall kit.
+3. **roblox.com.ge serves different content to different clients** — simple HTTP client (curl) gets a Roblox 404 page; browser-rendered urlscan scan gets the full malicious payload with injected script. This is **client-capability detection** (cloaking), not just User-Agent filtering.
+4. **delta-executor.club download URLs invisible in source** — all download buttons are `<button>` elements with no `href`; actual malware URLs injected at runtime via React hydration. Static analysis tools (wget, curl, VirusTotal URL scan) would miss the payload entirely.
+5. **rbux4aall uses two-stage JS loading** — static HTML contains only a config object; CloudFront-hosted JS bootstraps the full XF Content Locker kit at runtime. The `_WT()` function called by the CTA button doesn't exist in the inline HTML.
+
+### Files Produced
+
+- `data/html_snapshots/vercel-app.html` — 15,243 B, live fetch
+- `data/html_snapshots/delta-executor-club.html` — 206,720 B, live fetch
+- `data/html_snapshots/rbux4aall-netlify.html` — 15,012 B, live fetch
+- `data/html_snapshots/roblox-com-ge.html` — 63,957 B, live fetch (`/users/1/profile`)
+- `data/html_snapshots/roblox-com-ge-games.html` — 31 B, live fetch (`/games/123/test`)
+- `data/html_snapshots/roblox-com-pl-urlscan-dom.html` — 4,694 B, urlscan DOM recovery
+- `data/html_snapshots/vercel-app-urlscan-dom.html` — 4,120 B, urlscan DOM
+- `data/html_snapshots/delta-executor-urlscan-dom.html` — 35,396 B, urlscan DOM
+- `data/html_snapshots/rbux4aall-urlscan-dom.html` — 15,596 B, urlscan DOM
+- `data/html_snapshots/roblox-com-ge-urlscan-dom.html` — 31,525 B, urlscan DOM
+- Updated all 5 teardown JSONs in `data/teardowns/` (total sizes: 33-51 KB each, up from 11-20 KB)
+
+### Cross-Domain Observations
+
+- **4 distinct exfiltration mechanisms confirmed** — Discord webhook dual-beacon (vercel.app), directory-masqueraded JS file (roblox-com.pl), CPA offer wall via XF Content Locker (rbux4aall), Discord OAuth via Vaultcord reverse proxy injection (roblox.com.ge). Plus runtime-injected malware download URLs (delta-executor.club).
+- **3/5 domains use runtime JS injection to hide malicious payloads** — delta-executor.club (React hydration), rbux4aall (CloudFront-hosted XF kit), roblox.com.ge (reverse proxy injection). Static analysis would miss the payload on all three.
+- **Client-capability detection (cloaking) confirmed on roblox.com.ge** — serves different content to curl vs. browsers. This defeats most automated threat intel tools.
+- **Anti-analysis techniques concentrated on vercel.app** — 7 distinct techniques (right-click block, F12 block, DevTools size detection, debugger timing oracle, CSS user-select, selectstart/dragstart blocking, console warning). Other domains rely on runtime injection rather than anti-analysis.
+- **All 5 use different monetization models** — credential theft for resale (vercel.app, roblox-com.pl), malware distribution with ad revenue (delta-executor.club), CPA fraud (rbux4aall), Discord token theft as a service (roblox.com.ge).
+- **OPSEC leaks found on 3/5 domains** — Polish comments on roblox-com.pl, Chinese comment + "Font Changer" template leak on delta-executor.club, operator alias "amjad" hardcoded on rbux4aall.
+- **Vercel.app passive visitor beacon is unique** — sends IP + user-agent + URL to Discord webhook on *every page load*, not just form submission. Attacker gets visitor analytics even from suspicious users who don't enter credentials.
+- **roblox.com.ge is the most sophisticated** — live reverse proxy to real roblox.com with minimal injection (3 elements), client-capability cloaking, and interaction-triggered redirect (not automatic). Exploits real Roblox UX patterns ("Join Experience" button).

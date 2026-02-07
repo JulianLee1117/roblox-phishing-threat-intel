@@ -136,6 +136,280 @@
     "ip_harvesting_service": "api.ipify.org",
     "ip_harvesting_function": "getUserIP() at line 383 of inline script"
   },
+  "content_analysis": {
+    "page_title": "Connexion \u00e0 Roblox",
+    "page_type": "login_clone",
+    "screenshot_url": "https://urlscan.io/screenshots/019c3309-e045-723e-a1ac-805a14050ea3.png",
+    "html_snapshot_path": "data/html_snapshots/vercel-app.html",
+    "urlscan_dom_path": "data/html_snapshots/vercel-app-urlscan-dom.html",
+    "html_size_bytes": 15243,
+    "urlscan_dom_note": "urlscan DOM file is gzip-compressed (4120 bytes compressed, 14647 bytes original). DOM content is identical to the live HTML snapshot — confirms the page is a self-contained single-file deployment with no dynamic server-side rendering.",
+    "forms": [
+      {
+        "id": "loginForm",
+        "action": "javascript:void(0) (submit intercepted by addEventListener, no HTML action attribute)",
+        "method": "POST (via fetch to Discord webhook, not traditional form submission)",
+        "fields": ["username", "password"],
+        "field_details": {
+          "username": {
+            "type": "text",
+            "id": "username",
+            "placeholder": "Identifiant/E-mail/T\u00e9l\u00e9phone",
+            "required": true
+          },
+          "password": {
+            "type": "password",
+            "id": "password",
+            "placeholder": "Mot de passe",
+            "required": true
+          }
+        },
+        "asks_old_password": false,
+        "hidden_fields": [],
+        "submit_button": {
+          "id": "loginBtn",
+          "text": "Connexion",
+          "loading_text": "Connexion en cours..."
+        },
+        "post_submit_behavior": "On webhook success: shows 'Connexion r\u00e9ussie ! Redirection en cours...' then redirects to https://roblox.com/home after 2 seconds. On webhook failure: shows fake error 'Erreur mot de passe/username incorrect !.' to encourage retry with different credentials."
+      }
+    ],
+    "exfiltration_endpoints": [
+      {
+        "type": "discord_webhook",
+        "url": "https://discord.com/api/webhooks/1408202683021529099/b6VSQ72fPLL29P_W2sk-lgeWOa4Nk2fZOHDPAgukRaJMpGxVOrNdeON0dGc9LZdZYUz7",
+        "method": "POST",
+        "content_type": "application/json",
+        "webhook_id": "1408202683021529099",
+        "webhook_token": "b6VSQ72fPLL29P_W2sk-lgeWOa4Nk2fZOHDPAgukRaJMpGxVOrNdeON0dGc9LZdZYUz7",
+        "trigger": "form submit (sendToWebhook function at line 443)",
+        "data_exfiltrated": {
+          "username": "document.getElementById('username').value",
+          "password": "document.getElementById('password').value",
+          "victim_ip": "userIP variable (pre-fetched from ipify.org)",
+          "user_agent": "navigator.userAgent",
+          "timestamp": "new Date().toLocaleString('fr-FR')"
+        },
+        "discord_embed_format": {
+          "content": "New login attempt notification",
+          "embed_title": "Donn\u00e9es de connexion",
+          "embed_color": "0x2563eb (blue)",
+          "fields": ["Identifiant", "Mot de passe", "Adresse IP", "Navigateur", "Timestamp"]
+        }
+      },
+      {
+        "type": "discord_webhook",
+        "url": "https://discord.com/api/webhooks/1408202683021529099/b6VSQ72fPLL29P_W2sk-lgeWOa4Nk2fZOHDPAgukRaJMpGxVOrNdeON0dGc9LZdZYUz7",
+        "method": "POST",
+        "content_type": "application/json",
+        "webhook_id": "1408202683021529099",
+        "trigger": "page load (sendVisitInfo function at line 395, called from DOMContentLoaded handler at line 548)",
+        "data_exfiltrated": {
+          "victim_ip": "userIP variable (pre-fetched from ipify.org)",
+          "user_agent": "navigator.userAgent",
+          "timestamp": "new Date().toLocaleString('fr-FR')",
+          "page_url": "window.location.href"
+        },
+        "discord_embed_format": {
+          "content": "New site visit notification",
+          "embed_title": "Informations de visite",
+          "embed_color": "0xff9500 (orange)",
+          "fields": ["Adresse IP", "Navigateur", "Timestamp", "Page"]
+        },
+        "note": "This is a PASSIVE beacon — fires automatically on every page load before any user interaction. The attacker receives IP + user-agent + referrer URL for every visitor, even those who never submit the form. This serves as both visitor tracking and a canary to confirm the phishing page is live."
+      },
+      {
+        "type": "fetch",
+        "url": "https://api.ipify.org?format=json",
+        "method": "GET",
+        "trigger": "page load (getUserIP function at line 382, called from DOMContentLoaded handler at line 550)",
+        "data_received": "victim's public IPv4 address",
+        "note": "IP harvesting — fetches victim's real IP and stores it in the global userIP variable for inclusion in both the visit beacon and credential exfiltration payloads"
+      }
+    ],
+    "javascript_analysis": {
+      "obfuscation_detected": false,
+      "obfuscation_techniques": [],
+      "obfuscation_note": "All JavaScript is plaintext, unminified, with French-language comments. No Base64 encoding, no eval(), no atob(), no String.fromCharCode(), no packed/obfuscated code. The attacker made no attempt to hide the malicious logic — the webhook URL, exfiltration functions, and anti-analysis code are all readable inline.",
+      "cookie_access": false,
+      "cookie_note": "No document.cookie access, no cookie stealing, no session token harvesting. The page only targets username/password credentials.",
+      "anti_analysis": true,
+      "anti_analysis_techniques": [
+        {
+          "technique": "Right-click disabled",
+          "implementation": "document.addEventListener('contextmenu', ...) with e.preventDefault() at line 292",
+          "purpose": "Prevents victims from using right-click > Inspect Element or View Source"
+        },
+        {
+          "technique": "Keyboard shortcut blocking",
+          "implementation": "document.addEventListener('keydown', ...) at line 298 blocks F12 (keyCode 123), Ctrl+Shift+I (DevTools), Ctrl+Shift+J (Console), Ctrl+U (View Source), Ctrl+Shift+C (Element Selector), Ctrl+S (Save Page)",
+          "purpose": "Prevents keyboard-based access to browser developer tools and page saving",
+          "keycodes_blocked": [123, 73, 74, 85, 67, 83]
+        },
+        {
+          "technique": "DevTools window size detection",
+          "implementation": "setInterval at 500ms (line 344) comparing outerHeight-innerHeight and outerWidth-innerWidth against 160px threshold",
+          "purpose": "Detects when DevTools panel is docked (it increases the difference between outer and inner window dimensions)",
+          "evasion_action": "Redirects to https://www.google.com when detected"
+        },
+        {
+          "technique": "Debugger timing detection",
+          "implementation": "Timing check around a debugger statement (lines 370-375): measures Date() before and after 'debugger;' — if delta > 100ms, the debugger was attached and paused execution",
+          "purpose": "Detects if a debugger is attached (the debugger statement pauses execution, causing the timing check to fail)",
+          "evasion_action": "Redirects to https://www.google.com when detected"
+        },
+        {
+          "technique": "Text selection disabled",
+          "implementation": "Both CSS (user-select: none on body at line 14) and JS (selectstart event listener at line 358)",
+          "purpose": "Prevents copying page content for analysis or reporting"
+        },
+        {
+          "technique": "Drag-and-drop disabled",
+          "implementation": "dragstart event listener with preventDefault at line 363",
+          "purpose": "Prevents dragging page elements or text"
+        },
+        {
+          "technique": "Console warning message",
+          "implementation": "console.log with CSS styling at lines 378-379 — displays large red 'ARRET !' (STOP!) and a warning message in French",
+          "purpose": "Social engineering targeting anyone who does open the console — mimics the style of Facebook/banking site warnings to discourage further inspection",
+          "message_text": "ARRET ! Ceci est une fonctionnalit\u00e9 de navigateur destin\u00e9e aux d\u00e9veloppeurs."
+        }
+      ],
+      "external_scripts": [],
+      "external_scripts_note": "No external JavaScript files loaded. All JS is inline within a single <script> block (lines 281-565). No CDN libraries, no analytics, no third-party tracking. This minimizes external dependencies and network requests that could trigger security tools.",
+      "ip_harvesting": true,
+      "ip_harvesting_details": {
+        "service": "api.ipify.org",
+        "endpoint": "https://api.ipify.org?format=json",
+        "function": "getUserIP() at line 382",
+        "storage": "Global variable 'userIP' (line 286)",
+        "timing": "Called on DOMContentLoaded before any user interaction"
+      },
+      "navigator_fingerprinting": true,
+      "navigator_fingerprinting_details": {
+        "data_collected": "navigator.userAgent (stored in global variable 'userAgent' at line 287)",
+        "note": "Only collects user-agent string. No canvas fingerprinting, WebGL fingerprinting, or advanced browser fingerprinting detected."
+      },
+      "page_url_harvesting": true,
+      "page_url_harvesting_details": {
+        "data_collected": "window.location.href (sent in visit beacon at line 420)",
+        "note": "Captures the full URL the victim is visiting, which includes the phishing domain path and any query parameters (e.g., tracking parameters from the lure link)"
+      },
+      "notable_code": {
+        "dual_exfiltration_flow": "The page makes TWO separate Discord webhook calls: (1) sendVisitInfo() fires on every page load to log visitor IP/user-agent/URL, (2) sendToWebhook() fires on form submission to exfiltrate username/password/IP/user-agent/timestamp. Both go to the same webhook ID 1408202683021529099.",
+        "fake_error_on_webhook_failure": "If the Discord webhook POST fails (response.ok is false), the page shows 'Erreur mot de passe/username incorrect !.' — a fake credential error. This could cause victims to re-enter credentials, but it also means if Discord blocks the webhook, the page degrades to showing errors for every login attempt.",
+        "success_redirect": "On successful exfiltration, the page redirects to https://roblox.com/home after a 2-second delay. This sends the victim to the real Roblox site, making them think the login worked normally. The /home path is the authenticated Roblox landing page — if the victim is already logged into Roblox in another tab, this redirect would show their real dashboard, reinforcing the illusion.",
+        "button_state_management": "The login button disables during submission and changes text to 'Connexion en cours...' then re-enables in the finally block. This provides realistic UX feedback that mimics a legitimate login flow.",
+        "single_webhook_for_everything": "Both visit tracking and credential exfiltration use the same Discord webhook URL. This is operationally simple but fragile — if Discord disables the webhook, the attacker loses both visitor analytics and stolen credentials simultaneously.",
+        "no_local_storage_persistence": "No localStorage, sessionStorage, or IndexedDB usage detected. No cookie setting. The page does not persist any data locally — everything is fire-and-forget to the Discord webhook."
+      }
+    },
+    "social_engineering": {
+      "branding_elements": [
+        "Page title 'Connexion a Roblox' (French for 'Log in to Roblox')",
+        "Roblox 2025 logo loaded as favicon from Wikimedia Commons (upload.wikimedia.org/wikipedia/commons/1/1e/Roblox_Logo_2025.png)",
+        "Header text 'ROBLOX' with inline SVG icon mimicking Roblox's tilt motif",
+        "Dark theme (#0d0d0d background) matching Roblox's current dark mode aesthetic",
+        "Navigation links: Charts, Marketplace, Creer, Robux — mimicking real Roblox top nav",
+        "Search bar with 'Rechercher' placeholder matching Roblox's search UI",
+        "S'inscrire (Sign up) and Connexion (Login) buttons in header",
+        "Footer with real Roblox footer links: A propos, Emplois, Blog, Parents, Cartes-cadeaux, Aide, Conditions, Accessibilite, Confidentialite, Options des cookies",
+        "Copyright notice '2025 Roblox Corporation' in footer",
+        "Login form placeholders 'Identifiant/E-mail/Telephone' and 'Mot de passe' matching Roblox's French login page",
+        "Password recovery link 'Mot de passe ou nom d'utilisateur oublie ?'",
+        "Registration link 'Vous n'avez pas de compte ? S'inscrire'",
+        "MFA-suggestive button 'Envoyez-moi un code unique par email'",
+        "Cross-device login button 'Utiliser un autre appareil'"
+      ],
+      "trust_signals": [
+        "HTTPS with valid TLS certificate (wildcard *.vercel.app cert from Google Trust Services — green padlock in browser)",
+        "Domain structure 'www-roblox-com-frr-users-6048717178' designed to look like a legitimate Roblox URL when read quickly",
+        "Pixel-accurate reproduction of Roblox dark-mode login page layout",
+        "French localization throughout (all UI text, placeholders, error messages, copyright — consistent language for French-speaking target audience)",
+        "Fake success message 'Connexion reussie ! Redirection en cours...' provides reassuring feedback after credential theft",
+        "Redirect to real https://roblox.com/home after submission — victim ends up on real Roblox, reinforcing that the login 'worked'",
+        "Functional-looking MFA and cross-device buttons (non-functional but add credibility)",
+        "Loading state on submit button ('Connexion en cours...') mimics real login processing delay"
+      ],
+      "urgency_language": [
+        "No explicit urgency language detected — this page relies on trust mimicry rather than urgency/fear tactics",
+        "The lure URL path '/users/6048717178' implies the victim was directed here from a context suggesting they need to log in to view a specific user profile"
+      ],
+      "lure_type": "credentials",
+      "lure_mechanism": "The subdomain pattern 'www-roblox-com-frr-users-6048717178' suggests the phishing link was distributed as a fake Roblox profile URL. The 'frr' segment may indicate a French-specific campaign variant. Victims likely receive a link claiming they need to 'log in to view this profile' or similar pretext."
+    },
+    "roblox_specific": {
+      "mimics_real_page": true,
+      "real_page_mimicked": "roblox.com/login (French localization)",
+      "mimicry_accuracy": "High — the page reproduces Roblox's dark-mode login page layout including header navigation, search bar, centered login box, footer links, and French translations. However, it uses a simplified SVG icon rather than the exact Roblox logo in the header, and the login box styling is slightly simplified compared to the real page (no tab switching between username/email/phone login modes).",
+      "real_roblox_assets_loaded": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/1e/Roblox_Logo_2025.png (favicon — loaded from Wikimedia Commons, not from Roblox CDN directly)"
+      ],
+      "roblox_cdn_assets_loaded": [],
+      "roblox_cdn_note": "No assets loaded directly from roblox.com, rbxcdn.com, or any official Roblox CDN. The logo is sourced from Wikimedia Commons instead. This avoids making requests to Roblox infrastructure that could be detected or blocked.",
+      "lure_paths_used": [
+        "/users/6048717178/profile (implied by subdomain structure — the numeric ID 6048717178 is within the range of valid Roblox user IDs)"
+      ],
+      "roblox_user_id_in_domain": "6048717178",
+      "roblox_user_id_note": "The user ID 6048717178 in the subdomain is likely a real Roblox user ID used as bait. On real Roblox, user profile URLs follow the format roblox.com/users/{id}/profile. The attacker uses this ID to make the phishing URL look like a legitimate profile link.",
+      "post_theft_redirect": "https://roblox.com/home — the real authenticated Roblox home page. After stealing credentials, victims are seamlessly redirected to real Roblox, masking the theft."
+    },
+    "phishing_kit_indicators": {
+      "matches_known_kit": false,
+      "kit_id": null,
+      "kit_8l0pamh6_markers_present": false,
+      "controlPage_endpoint_present": false,
+      "notable_markers": [
+        "Single self-contained HTML file (no external JS, no PHP backend, no separate CSS)",
+        "All inline JavaScript with French comments — likely hand-crafted rather than generated by a kit builder",
+        "Discord webhook as sole exfiltration channel (no Telegram bot API, no custom backend, no email exfil)",
+        "Comment 'Configuration du webhook - Remplacez par votre URL de webhook' suggests this is a template/tutorial-style phishing page where the attacker pastes in their own webhook URL",
+        "Comment 'Site d'apprentissage - Donnees completes' in the Discord embed footer translates to 'Learning site - Complete data' — the attacker framed this as an educational/learning exercise",
+        "Anti-analysis section labeled '========== PROTECTION ANTI-F12 ==========' in a distinctive header comment style",
+        "ipify.org for IP harvesting is a very common choice in low-sophistication phishing kits",
+        "No server-side component — purely static HTML/JS with client-side fetch() to Discord",
+        "French-language variable names and comments throughout (userIP = 'Non disponible', error messages in French)",
+        "No token refresh, no session management, no multi-stage credential collection — single-shot username+password grab"
+      ],
+      "sophistication_assessment": "Low-to-medium. The page is well-designed visually (good Roblox mimicry) and includes multiple anti-analysis techniques (7 distinct methods), but uses no obfuscation, relies on a single Discord webhook for all exfiltration, and leaves the webhook URL exposed in plaintext. The French comments and 'learning site' label suggest a relatively inexperienced attacker, possibly following a tutorial or modifying a shared template."
+    },
+    "dom_comparison": {
+      "live_html_matches_urlscan_dom": true,
+      "differences": "The urlscan DOM is functionally identical to the live HTML snapshot. Minor differences: urlscan strips the <!DOCTYPE html> declaration, converts self-closing tags (required='' vs required), and strips the <html lang='fr'> wrapper. No dynamic DOM manipulation detected — what the server sends is what the browser renders.",
+      "dynamic_content": false,
+      "dynamic_content_note": "No JavaScript-generated DOM elements, no dynamic content injection, no AJAX-loaded page sections. The page is entirely static HTML with event listeners attached after DOMContentLoaded."
+    },
+    "interview_notes": {
+      "security_concepts": [
+        "Discord webhook abuse as C2/exfil: Discord webhooks provide a free, anonymous, reliable exfiltration channel with no authentication required to POST. The attacker never needs to run a server — Discord handles message delivery, storage, and notification. This pattern is increasingly common in commodity phishing targeting younger demographics.",
+        "Dual-beacon architecture: This page implements two distinct exfiltration events: (1) a passive visit beacon on page load that tracks every visitor, and (2) an active credential theft on form submission. This gives the attacker visitor analytics (how many people clicked the link) alongside actual stolen credentials — useful for measuring campaign success rates.",
+        "Anti-analysis defense-in-depth: The page deploys 7 distinct anti-analysis techniques (right-click block, keyboard shortcut interception, DevTools size detection, debugger timing detection, text selection block, drag prevention, console warning). While individually trivial to bypass, layering them creates friction for casual inspection. The DevTools detection with auto-redirect to Google is the most effective — it makes the page disappear when a user opens developer tools.",
+        "Debugger timing oracle: The 'debugger;' statement timing check (lines 370-375) is a clever anti-debugging technique. In normal execution, the debugger statement is a no-op. But if a debugger is attached, it pauses execution, causing the Date() delta to exceed 100ms. This is a well-known technique from malware analysis that has crossed over into web phishing.",
+        "Post-theft redirect to real site: Redirecting to https://roblox.com/home after credential theft is a standard phishing technique called a 'passthrough' or 'transparent redirect.' If the victim is already authenticated in another browser tab, they see their real Roblox dashboard and assume the login was legitimate. This significantly delays victim awareness of the compromise.",
+        "Static hosting abuse: The entire phishing operation is a single 15KB HTML file deployed to Vercel's free tier. No backend, no database, no server-side logic. This makes the attack infrastructure disposable — the attacker can redeploy identical pages to new subdomains in seconds. Traditional server-side forensics (log analysis, database dumps) are impossible.",
+        "IP harvesting via third-party API: Using api.ipify.org to fetch the victim's IP is necessary because the phishing page is served from Vercel's CDN — the attacker has no access to server logs or request headers. The client-side IP fetch is a workaround for the lack of server-side access in static hosting abuse scenarios.",
+        "Fake error as credential replay encouragement: When the Discord webhook fails, the page displays 'Erreur mot de passe/username incorrect' — a fake authentication error. This may cause victims to try different passwords, potentially revealing multiple credentials for the same account or credentials reused from other services."
+      ],
+      "talking_points": [
+        "Detection strategy: This page could be detected by (1) monitoring Vercel subdomains for brand-name patterns via Certificate Transparency or DNS passive collection, (2) YARA rules matching the distinctive anti-analysis comment block '========== PROTECTION ANTI-F12 ==========', (3) network signatures for api.ipify.org followed by Discord webhook POST from the same page, (4) content hash tracking (etag d15a0fd1c74b2b16bd19ec8e0bd4b29d).",
+        "Incident response: Two-pronged takedown required. Report to Vercel (vercel.com/abuse) to remove the deployment, AND report the Discord webhook (ID 1408202683021529099) to Discord Trust & Safety to sever the exfiltration channel. Neither alone is sufficient.",
+        "Attribution limitations: The attacker is fully insulated. Vercel free tier requires only a GitHub/GitLab/Bitbucket account (which can be disposable). The Discord webhook reveals only a webhook ID, not the attacker's Discord account. IP addresses resolve to Amazon CDN anycast. The only attribution lead is the French language throughout the code and comments.",
+        "Campaign reconstruction: The subdomain pattern 'www-roblox-com-frr-users-{ID}' suggests this is one deployment in a campaign. The 'frr' likely indicates a French regional variant. Searching for similar subdomain patterns on Vercel (www-roblox-com-*) could reveal other deployments in the same campaign.",
+        "Comparison to real Roblox login: Real roblox.com/login uses React with server-side rendering, loads multiple JS bundles from rbxcdn.com, sets authentication cookies, posts credentials to auth.roblox.com/v2/login, and has CAPTCHA protection. This phishing page has none of those — it is a visual-only replica with client-side JavaScript fetch() to Discord.",
+        "Why this targets children: Roblox's primary demographic is ages 9-15. French-language targeting suggests victims in France, Belgium, Switzerland, or French-speaking Africa. The clean visual mimicry would be convincing to younger users. The anti-analysis techniques specifically target the DevTools inspection that a more tech-savvy user might attempt.",
+        "Evidence preservation: The HTML snapshot (15,243 bytes), urlscan DOM (gzip, 4,120 bytes / 14,647 uncompressed), and urlscan screenshot form a complete forensic record. The etag and content-length can be used to verify if future captures match this exact deployment."
+      ],
+      "notable_findings": [
+        "PASSIVE VISITOR BEACON: The sendVisitInfo() function fires on EVERY page load, not just form submission. The attacker receives a Discord notification with IP + user-agent + URL for every visitor who merely loads the page. This means the attacker has visibility into their campaign's click-through rate and can correlate visitor IPs with subsequent credential submissions.",
+        "SEVEN ANTI-ANALYSIS TECHNIQUES: The page implements an unusually comprehensive anti-analysis suite for a low-sophistication kit: (1) right-click disable, (2) F12/Ctrl+Shift+I/Ctrl+Shift+J/Ctrl+U/Ctrl+Shift+C/Ctrl+S keyboard blocking, (3) DevTools window size detection with 500ms polling, (4) debugger timing oracle, (5) CSS user-select:none, (6) selectstart event blocking, (7) dragstart event blocking. Plus a console.log warning message as social engineering against anyone who does open DevTools.",
+        "WEBHOOK TOKEN FULLY EXPOSED: The complete Discord webhook URL including the secret token is in plaintext at line 283. This means anyone who views the page source can: (1) send messages to the attacker's Discord channel, (2) retrieve recent webhook messages (via GET request), (3) delete the webhook (via DELETE request). The webhook is both the exfil channel and a vulnerability in the attacker's operational security.",
+        "'LEARNING SITE' SELF-LABELING: The Discord embed footer reads 'Site d'apprentissage - Donnees completes' (Learning site - Complete data). The webhook config comment says 'Remplacez par votre URL de webhook' (Replace with your webhook URL). This strongly suggests the attacker is following a tutorial or modifying a template shared in French-speaking hacking communities.",
+        "FAKE ERROR DOUBLES AS RETRY MECHANISM: When the Discord webhook POST fails (network error, webhook deleted, rate limit), the page shows 'Erreur mot de passe/username incorrect' — indistinguishable from a real failed login. This can cause victims to re-enter credentials repeatedly, potentially revealing password variations.",
+        "NO OBFUSCATION WHATSOEVER: Unlike more sophisticated phishing kits that use Base64, eval(), packed JS, or WebAssembly, this page's entire JavaScript is plaintext with French comments. The webhook URL, all functions, and all anti-analysis code are readable at a glance. This is characteristic of a beginner phisher or a tutorial-following deployment.",
+        "URLSCAN DOM IDENTICAL TO LIVE HTML: The urlscan.io captured DOM is byte-for-byte functionally identical to the live HTML snapshot, confirming no server-side cloaking, user-agent detection, or dynamic content variation. The page serves the same phishing content to all visitors regardless of context."
+      ]
+    }
+  },
   "interview_notes": {
     "security_concepts": [
       "Free-tier platform abuse: Vercel provides free hosting with automatic TLS, global CDN, and instant deployment — zero cost to the attacker for a fully functional phishing site with trusted HTTPS",

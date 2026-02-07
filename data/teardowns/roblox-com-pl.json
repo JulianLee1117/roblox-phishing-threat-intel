@@ -165,6 +165,324 @@
       ]
     }
   },
+  "content_analysis": {
+    "page_title": "Log in to Roblox",
+    "page_type": "login_clone",
+    "screenshot_url": null,
+    "html_snapshot_path": null,
+    "urlscan_dom_path": "data/html_snapshots/roblox-com-pl-urlscan-dom.html",
+    "html_size_bytes": 4694,
+    "html_decompressed_size_bytes": 16057,
+    "content_status": "taken_down_recovered_via_urlscan",
+    "recovery_source": "urlscan.io DOM snapshot 019c2a0a-cefb-7150-97f7-64989c25c494 (Feb 4, 2026)",
+    "forms": [
+      {
+        "id": "login-form-real",
+        "action": null,
+        "action_note": "No action attribute — form submits to same page by default, but JavaScript in css/oefdspofrewoisfewfewfw02349.js likely intercepts the submit event to exfiltrate credentials",
+        "method": "GET (default — no method attribute specified)",
+        "fields": [
+          {
+            "name": "username",
+            "id": "login-username",
+            "type": "text",
+            "placeholder": "Username/Email/Phone",
+            "required": true
+          },
+          {
+            "name": "password",
+            "id": "login-password",
+            "type": "password",
+            "placeholder": "Password",
+            "required": true
+          }
+        ],
+        "asks_old_password": false,
+        "hidden_fields": [],
+        "submit_button": {
+          "id": "login-button",
+          "text": "Log In",
+          "class": "btn-full-width login-button btn-secondary-md"
+        },
+        "deceptive_buttons": [
+          {
+            "id": "otp-login-button",
+            "visible_text": "Email Me a One-Time Code",
+            "actual_behavior": "Dispatches submit event on login-form-real — harvests credentials instead of sending OTP",
+            "onclick": "document.getElementById('login-form-real').dispatchEvent(new Event('submit'))"
+          },
+          {
+            "id": "cross-device-login-button",
+            "visible_text": "Use Another Device",
+            "actual_behavior": "Dispatches submit event on login-form-real — harvests credentials instead of cross-device flow",
+            "onclick": "document.getElementById('login-form-real').dispatchEvent(new Event('submit'))"
+          }
+        ]
+      }
+    ],
+    "exfiltration_endpoints": [
+      {
+        "type": "javascript_file",
+        "path": "css/oefdspofrewoisfewfewfw02349.js",
+        "note": "Obfuscated-name JS file loaded from css/ directory (directory masquerading). Not captured in urlscan DOM snapshot — this file likely contains the form submit handler that POSTs credentials to an attacker-controlled endpoint. The filename 'oefdspofrewoisfewfewfw02349' appears to be keyboard-mashed gibberish to avoid signature-based detection.",
+        "file_recovered": false
+      }
+    ],
+    "page_fidelity": {
+      "local_css_files_count": 28,
+      "external_css_files_count": 1,
+      "external_css_url": "https://static.rbxcdn.com/css/leanbase___fb0c7d1e28371fc5e8367ce241b98d69_m.css/fetch",
+      "total_css_references": 29,
+      "uses_angularjs": true,
+      "angularjs_evidence": "Duplicate AngularJS ng-cloak/ng-animate/ng-anchor CSS rules in <style> tags, ng-csp meta tag — these are injected by AngularJS framework initialization",
+      "has_csrf_token": true,
+      "csrf_token_value": "Kmz/DzjdHDnh",
+      "csrf_token_note": "Meta tag <meta name='csrf-token' data-token='Kmz/DzjdHDnh'> present inside <body> — copied from a real Roblox page scrape to increase fidelity, but non-functional on the phishing domain",
+      "polish_comments": true,
+      "polish_comments_found": [
+        "<!-- CSS Roblox – zachowane dla wyglądu --> (translation: 'CSS Roblox — kept for appearance')",
+        "<!-- FunCaptcha (opcjonalny) --> (translation: 'FunCaptcha (optional)')",
+        "<!-- Footer -->"
+      ],
+      "canonical_href": "https://www.roblox.com/login",
+      "hreflang_alternates": [
+        "x-default", "de", "es", "fr", "id", "it", "ja", "ko", "pl", "pt", "th", "tr", "vi"
+      ],
+      "structured_data_jsonld": true,
+      "structured_data_type": "Organization (Roblox)",
+      "meta_tags_cloned": [
+        "author: Roblox Corporation",
+        "description: Login to your Roblox account or sign up to create a new account.",
+        "keywords: free games, online games, building games, virtual worlds, free mmo, gaming cloud, physics engine",
+        "apple-itunes-app: app-id=431946152",
+        "page-meta: data-internal-page-name=Login",
+        "device-meta: data-device-type=computer",
+        "environment-meta: data-domain=roblox.com",
+        "locale-data: data-language-code=en_us",
+        "hardware-backed-authentication-data",
+        "account-switching-data",
+        "passkey-data",
+        "page-retry-header-enabled"
+      ],
+      "favicon_path": "images/e854eb7b2951ac03edba9a2681032bba.ico",
+      "apple_touch_icon": "images/7c5fe83dffa97250aaddd54178900ea7.png",
+      "copyright_text": "2022 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.",
+      "fidelity_rating": "very_high — 28 local CSS files scraped from real Roblox, AngularJS framework artifacts, csrf-token meta tag, full hreflang set, JSON-LD structured data, FunCaptcha references, real Roblox CDN CSS, complete navigation and footer cloned from legitimate site. Only giveaways are Polish HTML comments, copyright year frozen at 2022, navigation links pointing to index.html, and the obfuscated JS filename."
+    },
+    "javascript_analysis": {
+      "obfuscation_detected": true,
+      "obfuscation_details": "The main credential-harvesting script uses an obfuscated filename (oefdspofrewoisfewfewfw02349.js) and is placed in the css/ directory to masquerade as a stylesheet asset. The file content was not captured in the urlscan DOM snapshot.",
+      "cookie_access": false,
+      "cookie_access_note": "No document.cookie access visible in the DOM snapshot HTML. The uncaptured JS file may contain cookie access.",
+      "anti_analysis": false,
+      "anti_analysis_note": "No anti-analysis techniques visible in inline code. A data-machine-id attribute on <head> tag (495b2758-5bb8-bf23-8b9a-7233b93d0fbf) may be a urlscan artifact or tracking identifier.",
+      "external_scripts": [
+        {
+          "url": "https://roblox-api.arkoselabs.com/cdn/fc/js/c6544c66c46b670694af9c762d53aaf89b8e87ce/standard/funcaptcha_api.js",
+          "purpose": "Arkose Labs FunCaptcha API — loaded from legitimate Roblox FunCaptcha endpoint. Included for visual fidelity but the empty callback (reportFunCaptchaLoaded(){}) means it has no functional purpose on this phishing page.",
+          "loaded_async": true
+        },
+        {
+          "url": "https://roblox-api.arkoselabs.com/fc/api/?onload=reportFunCaptchaLoaded",
+          "purpose": "FunCaptcha initialization script — triggers empty callback, non-functional",
+          "loaded_async": true
+        }
+      ],
+      "local_scripts": [
+        {
+          "path": "css/oefdspofrewoisfewfewfw02349.js",
+          "purpose": "Primary credential exfiltration script — placed in css/ directory to avoid detection. File not recovered in DOM snapshot.",
+          "suspicious_indicators": [
+            "Gibberish filename to evade signature detection",
+            "Placed in css/ directory (directory masquerading)",
+            "Only JS file loaded — all credential harvesting logic concentrated here",
+            "Loaded at end of <body> to execute after DOM is ready"
+          ]
+        }
+      ],
+      "inline_script_analysis": [
+        {
+          "location": "head — JSON-LD structured data",
+          "content": "Organization schema for Roblox with social media links",
+          "malicious": false,
+          "purpose": "SEO fidelity — copied from real roblox.com"
+        },
+        {
+          "location": "body — FunCaptcha callback",
+          "content": "function reportFunCaptchaLoaded() {}",
+          "malicious": false,
+          "purpose": "Empty callback to prevent JS errors when FunCaptcha loads — captcha is decorative only"
+        }
+      ],
+      "deceptive_onclick_handlers": [
+        {
+          "element": "#otp-login-button",
+          "handler": "document.getElementById('login-form-real').dispatchEvent(new Event('submit'))",
+          "deception": "Button labeled 'Email Me a One-Time Code' actually submits the login form, harvesting any entered credentials"
+        },
+        {
+          "element": "#cross-device-login-button",
+          "handler": "document.getElementById('login-form-real').dispatchEvent(new Event('submit'))",
+          "deception": "Button labeled 'Use Another Device' actually submits the login form, harvesting any entered credentials"
+        }
+      ],
+      "notable_code": "Three form submission vectors: (1) direct Log In button submit, (2) OTP button dispatches submit event on login form, (3) Cross-Device button dispatches submit event on login form. All three paths lead to credential harvesting. The actual exfiltration mechanism is in the unrecovered JS file css/oefdspofrewoisfewfewfw02349.js."
+    },
+    "social_engineering": {
+      "branding_elements": [
+        "Page title: 'Log in to Roblox'",
+        "Roblox logo via icon-logo CSS class in navbar",
+        "Meta author: 'Roblox Corporation'",
+        "Meta description mimics real Roblox login page",
+        "JSON-LD structured data with Roblox organization, logo, social links",
+        "Apple iTunes app-id (431946152) for real Roblox iOS app",
+        "Roblox favicon and Apple touch icon (locally hosted copies)",
+        "Full navigation bar with Charts, Marketplace, Create, Robux links",
+        "Footer with About Us, Jobs, Blog, Parents, Gift Cards, Help, Terms, Accessibility, Privacy",
+        "Copyright notice: '2022 Roblox Corporation'",
+        "Dark theme with gotham-font class matching real Roblox UI",
+        "Sign Up button linking to real roblox.com signup page"
+      ],
+      "trust_signals": [
+        "FunCaptcha scripts loaded from legitimate roblox-api.arkoselabs.com — suggests security measures are in place",
+        "CSRF token meta tag implies server-side security validation",
+        "HTTPS padlock (Let's Encrypt certificate)",
+        "Canonical URL and hreflang tags pointing to real roblox.com/login — may influence URL bar display in some contexts",
+        "Password passkey-data and hardware-backed-authentication-data meta tags suggest modern security features",
+        "Noscript fallback message mimics professional web development practices",
+        "Sign Up link goes to real roblox.com — mixing real and phishing elements increases credibility",
+        "Forgot Password link goes to real roblox.com/login/forgot-password-or-username"
+      ],
+      "urgency_language": [],
+      "urgency_note": "No urgency language detected — this phishing page relies on fidelity rather than urgency. The clone is so accurate that the user is unlikely to question its legitimacy.",
+      "lure_type": "credentials",
+      "target_demographic": "Roblox players — primarily children and young adults"
+    },
+    "roblox_specific": {
+      "mimics_real_page": true,
+      "real_page_mimicked": "https://www.roblox.com/login",
+      "real_roblox_assets_loaded": [
+        "https://static.rbxcdn.com/css/leanbase___fb0c7d1e28371fc5e8367ce241b98d69_m.css/fetch",
+        "https://roblox-api.arkoselabs.com/cdn/fc/js/c6544c66c46b670694af9c762d53aaf89b8e87ce/standard/funcaptcha_api.js",
+        "https://roblox-api.arkoselabs.com/fc/api/?onload=reportFunCaptchaLoaded"
+      ],
+      "locally_cloned_assets": {
+        "css_files": 28,
+        "images": ["favicon .ico", "apple-touch-icon .png"],
+        "js_files": 1
+      },
+      "lure_paths_used": ["/login"],
+      "navigation_links_behavior": "Charts, Marketplace, Create, Robux, and all footer links point to index.html (the phishing site root) instead of real roblox.com subpages — a fidelity gap",
+      "real_roblox_links_preserved": [
+        "https://www.roblox.com/account/signupredir?returnUrl=https%3A%2F%2Fwww.roblox.com%2FLogin (Sign Up button)",
+        "https://www.roblox.com/login/forgot-password-or-username (Forgot Password link)",
+        "https://www.roblox.com/ (Sign Up link in footer area)"
+      ]
+    },
+    "cross_domain_links": {
+      "references_to_roblox_com_us": false,
+      "references_to_roblox_com_us_note": "No references to roblox-com.us found in the HTML/JS of this page. The link between the two domains is established only via CT log SAN overlap (Jan 2023 certificate), not via code-level references.",
+      "other_domain_references": [
+        {
+          "domain": "roblox.com / www.roblox.com",
+          "context": "Canonical URL, hreflang alternates, Sign Up link, Forgot Password link, JSON-LD structured data — legitimate Roblox references used for fidelity"
+        },
+        {
+          "domain": "static.rbxcdn.com",
+          "context": "One CSS file loaded from Roblox CDN (leanbase CSS)"
+        },
+        {
+          "domain": "roblox-api.arkoselabs.com",
+          "context": "FunCaptcha API scripts — legitimate Arkose Labs endpoint used by real Roblox"
+        },
+        {
+          "domain": "images.rbxcdn.com",
+          "context": "Referenced in JSON-LD structured data for Roblox logo image URL"
+        },
+        {
+          "domain": "fonts.googleapis.com",
+          "context": "Lato font loaded via NordVPN content script extension — this is a browser extension artifact from the urlscan scanning environment, not part of the phishing kit"
+        }
+      ]
+    },
+    "takedown_analysis": {
+      "content_removed": true,
+      "infrastructure_intact": true,
+      "dns_active": true,
+      "tls_active": true,
+      "email_infrastructure_active": true,
+      "domain_registration_active": true,
+      "domain_expiry": "2026-11-04",
+      "tls_expiry": "2026-04-19",
+      "redeployment_risk": "high — only the GitHub Pages content was removed; DNS, domain registration (valid 9 more months), TLS certificate (valid 2+ more months), MX records, and SPF are all intact. Attacker can redeploy by pushing new content to a GitHub repo or re-pointing DNS to a different host.",
+      "takedown_effectiveness": "partial — content removed (likely via GitHub abuse report removing the Pages repository) but domain/DNS/TLS/email infrastructure all remain active and ready for reuse. The Let's Encrypt cert was even renewed on Jan 19, 2026 (after the content was likely already down), suggesting automated renewal is still running.",
+      "recommended_actions": [
+        "Report domain to OVH SAS registrar for suspension",
+        "Report to NASK (.pl registry) for domain takedown",
+        "Request Let's Encrypt certificate revocation",
+        "Submit to Google Safe Browsing and Microsoft SmartScreen blocklists",
+        "Monitor for DNS A record changes indicating new hosting"
+      ]
+    },
+    "phishing_kit_indicators": {
+      "matches_known_kit": false,
+      "kit_id": null,
+      "kit_8l0pamh6_markers_found": false,
+      "controlPage_create_endpoint_found": false,
+      "notable_markers": [
+        "Obfuscated JS filename pattern: css/oefdspofrewoisfewfewfw02349.js — keyboard-mashed name in wrong directory",
+        "Polish-language HTML comments indicate Polish-speaking kit author or operator",
+        "28 locally-hosted CSS files with SHA-256-like filenames suggest automated scraping of real Roblox assets",
+        "Directory masquerading: JS exfiltration script placed in css/ directory",
+        "Three-vector form submission (direct submit + two deceptive buttons dispatching submit events)",
+        "Empty FunCaptcha callback pattern: decorative captcha loading for visual fidelity",
+        "Static GitHub Pages hosting pattern — common in low-sophistication phishing kits",
+        "data-machine-id attribute on <head> tag may be a kit fingerprint or urlscan artifact: 495b2758-5bb8-bf23-8b9a-7233b93d0fbf"
+      ],
+      "kit_characteristics": {
+        "sophistication": "medium — high visual fidelity via automated asset scraping, but simple credential form with no server-side validation, no multi-step authentication flow, no session handling",
+        "likely_origin": "Polish-speaking operator based on HTML comments",
+        "hosting_pattern": "Static files on GitHub Pages — no backend server, exfiltration likely via third-party webhook or API endpoint in the JS file"
+      }
+    },
+    "urlscan_artifacts": {
+      "data_machine_id": "495b2758-5bb8-bf23-8b9a-7233b93d0fbf",
+      "nordvpn_extension_detected": true,
+      "nordvpn_extension_note": "A NordVPN browser extension stylesheet (Lato font from Google Fonts) was injected into the DOM by the scanning browser — this is a urlscan environment artifact, not part of the phishing kit",
+      "dom_snapshot_limitations": "The DOM snapshot captures the rendered HTML but did not include the content of css/oefdspofrewoisfewfewfw02349.js, which is the primary exfiltration script. Full behavioral analysis would require the JS file."
+    },
+    "interview_notes": {
+      "security_concepts": [
+        "Credential harvesting form analysis: Identifying <form> elements, input fields, and submit handlers that capture usernames and passwords",
+        "Directory masquerading: Placing a JS exfiltration script in a css/ directory to evade casual inspection and some automated scanners",
+        "Deceptive UI elements: The OTP and Cross-Device buttons appear to offer alternative login methods but actually dispatch the credential-harvesting form submit — a social engineering technique that increases the chance of capturing partially-entered credentials",
+        "Decorative security controls: FunCaptcha loaded from legitimate Arkose Labs endpoints but with an empty callback — creates the appearance of bot protection without any actual functionality",
+        "CSRF token theater: A csrf-token meta tag copied from real Roblox adds apparent server-side security but is non-functional on a static phishing page",
+        "Asset scraping for fidelity: 28 CSS files with content-hash filenames were scraped from real roblox.com, achieving near-pixel-perfect visual cloning",
+        "Partial takedown ineffectiveness: Removing content without suspending the domain, revoking the certificate, or disabling DNS leaves infrastructure ready for rapid redeployment",
+        "DOM snapshot forensics: When live content is taken down, cached DOM snapshots from services like urlscan.io preserve evidence for analysis — critical for incident response and threat intel"
+      ],
+      "talking_points": [
+        "The phishing page achieves very high fidelity by scraping 28 CSS files, favicon, touch icons, and meta tags from real roblox.com, plus loading FunCaptcha scripts from legitimate Arkose Labs endpoints — a victim would see a page visually identical to the real Roblox login",
+        "Three credential harvesting vectors exist: the 'Log In' button submits the form directly, while the 'Email Me a One-Time Code' and 'Use Another Device' buttons use onclick handlers to dispatch a submit event on the same form — this means any button the user clicks harvests their credentials",
+        "The exfiltration script css/oefdspofrewoisfewfewfw02349.js uses two evasion techniques: (1) a gibberish filename to avoid signature matching, and (2) placement in the css/ directory to masquerade as a static asset",
+        "Polish-language HTML comments ('zachowane dla wyglądu' = 'kept for appearance', 'opcjonalny' = 'optional') reveal the kit author or operator is Polish-speaking, consistent with the .pl TLD choice",
+        "The page mixes real and fake links strategically: Sign Up and Forgot Password point to real roblox.com (building trust), while navigation links point to index.html (keeping the victim on the phishing domain)",
+        "The takedown was only partial — GitHub Pages content was removed but the domain (valid until Nov 2026), DNS, TLS cert (renewed Jan 2026, valid until Apr 2026), and email infrastructure all remain active, meaning redeployment requires only pushing new content or changing DNS A records",
+        "The urlscan DOM snapshot was essential for this analysis — without it, we would only have infrastructure data with no visibility into the actual phishing content or techniques used"
+      ],
+      "notable_findings": [
+        "THREE-VECTOR CREDENTIAL HARVESTING: All three user-facing buttons (Log In, Email OTP, Use Another Device) trigger the same form submission, maximizing the chance of capturing credentials regardless of which login method the victim attempts",
+        "DIRECTORY MASQUERADING: The sole JavaScript payload is named css/oefdspofrewoisfewfewfw02349.js — placing it in the css/ directory is a deliberate evasion technique to blend in with the 28 legitimate CSS files",
+        "DECORATIVE FUNCAPTCHA: FunCaptcha scripts load from real Arkose Labs endpoints but the callback is empty (function reportFunCaptchaLoaded() {}) — the captcha never actually renders, it exists solely to create the impression of bot protection in the page source",
+        "POLISH-SPEAKING OPERATOR: Two HTML comments in Polish ('zachowane dla wyglądu', 'opcjonalny') confirm the kit author/operator speaks Polish, providing an attribution data point that correlates with the .pl domain choice",
+        "MIXED REAL/FAKE LINKS: The Sign Up button, Forgot Password link, and sign-up prompt all link to real roblox.com, while navigation and footer links go to index.html — this hybrid approach builds trust while keeping the victim within the phishing domain",
+        "UNRECOVERED EXFILTRATION SCRIPT: The critical JS file (css/oefdspofrewoisfewfewfw02349.js) was not captured in the urlscan DOM snapshot, meaning we cannot determine the exact exfiltration endpoint (Discord webhook, Telegram bot, external server, etc.) — this is a gap in our analysis",
+        "FROZEN COPYRIGHT YEAR: Copyright text reads '2022 Roblox Corporation' — the page was scraped from roblox.com when the copyright said 2022, providing a loose timestamp for when the phishing kit's assets were originally collected",
+        "CERT RENEWAL AFTER TAKEDOWN: The Let's Encrypt certificate was renewed on Jan 19, 2026, likely after content was already removed — indicating automated renewal is running and the operator has not abandoned the infrastructure"
+      ]
+    }
+  },
   "interview_notes": {
     "security_concepts": [
       "ccTLD abuse: Using Polish .pl TLD to impersonate roblox.com via a hyphenated lookalike domain (roblox-com.pl)",

