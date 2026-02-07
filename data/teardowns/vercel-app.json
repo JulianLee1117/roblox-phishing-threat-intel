@@ -1,0 +1,170 @@
+{
+  "domain": "www-roblox-com-frr-users-6048717178.vercel.app",
+  "category": "platform_hosted_credential_harvester",
+  "analysis_date": "2026-02-07",
+  "urlscan_ref": "019c3309-e045-723e-a1ac-805a14050ea3",
+  "infrastructure": {
+    "ip_addresses": {
+      "A": ["216.198.79.195", "64.29.17.195"],
+      "AAAA": []
+    },
+    "nameservers": [
+      "ns1.vercel-dns-3.com.",
+      "ns2.vercel-dns-3.com.",
+      "ns3.vercel-dns-3.com.",
+      "ns4.vercel-dns-3.com."
+    ],
+    "txt_records": [],
+    "hosting_provider": "Vercel",
+    "hosting_tier": "free",
+    "cdn": "Vercel Edge Network (backed by Amazon/AS16509 anycast infrastructure)",
+    "asn": "AS16509 (AMAZON-02 - Amazon.com, Inc., US)",
+    "geolocation": {
+      "city": "Walnut",
+      "region": "California",
+      "country": "US",
+      "org": "AS16509 Amazon.com, Inc."
+    },
+    "reverse_dns": "No PTR record (both 216.198.79.195 and 64.29.17.195 return empty reverse DNS — typical of anycast CDN nodes)",
+    "whois": "Vercel subdomain — WHOIS not applicable (free-tier platform abuse)",
+    "tls": {
+      "issuer": "C=US, O=Google Trust Services, CN=WR1",
+      "valid_from": "2025-12-26T17:44:01Z",
+      "valid_to": "2026-03-26T17:44:00Z",
+      "san_list": ["*.vercel.app", "vercel.app"],
+      "serial": "f2:c7:e4:48:9d:41:67:f6:0d:26:a3:97:2f:74:a6:21",
+      "signature_algorithm": "sha256WithRSAEncryption",
+      "protocol": "TLS 1.3",
+      "cipher": "AES_128_GCM",
+      "key_exchange_group": "X25519MLKEM768",
+      "certificate_transparency": "compliant",
+      "ct_logs": [
+        "DigiCert Sphinx2026h1",
+        "Google Xenon2026h1"
+      ]
+    },
+    "http_headers": {
+      "server": "Vercel",
+      "redirect_chain": [],
+      "status_code": 200,
+      "protocol": "h2",
+      "security_headers_present": [
+        "strict-transport-security: max-age=63072000; includeSubDomains; preload",
+        "access-control-allow-origin: *"
+      ],
+      "security_headers_missing": [
+        "content-security-policy",
+        "x-frame-options",
+        "x-content-type-options",
+        "referrer-policy",
+        "permissions-policy",
+        "x-xss-protection"
+      ],
+      "cookies": [],
+      "notable_headers": {
+        "x-vercel-cache": "HIT",
+        "x-vercel-id": "sfo1::fls4p-1770496319064-a0b5e33bd907",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-disposition": "inline",
+        "etag": "\"d15a0fd1c74b2b16bd19ec8e0bd4b29d\"",
+        "last-modified": "Tue, 03 Feb 2026 22:44:36 GMT",
+        "content-length": "15243",
+        "content-type": "text/html; charset=utf-8",
+        "age": "337643"
+      }
+    },
+    "crtsh": {
+      "first_seen": "N/A (subdomain covered by wildcard *.vercel.app certificate — no individual cert issued)",
+      "total_certs": 0,
+      "cert_history": [],
+      "note": "crt.sh returns no results for the subdomain because Vercel uses a single wildcard certificate (*.vercel.app) issued by Google Trust Services (WR1). The parent domain vercel.app has 994+ certificate log entries dating from 2020-01-28 to present."
+    },
+    "urlscan_data": {
+      "scan_date": "2026-02-06T13:00:16.910Z",
+      "scan_source": "openphish (automatic submission)",
+      "screenshot_url": "https://urlscan.io/screenshots/019c3309-e045-723e-a1ac-805a14050ea3.png",
+      "report_url": "https://urlscan.io/result/019c3309-e045-723e-a1ac-805a14050ea3/",
+      "dom_url": "https://urlscan.io/dom/019c3309-e045-723e-a1ac-805a14050ea3/",
+      "verdict": {
+        "overall_malicious": false,
+        "engine_score": 91,
+        "engine_malicious": true,
+        "engine_tags": ["urlscan-ml", "urlscan-ml-0.1.0-1-d9114fd"],
+        "community_votes_malicious": 0,
+        "community_votes_benign": 0
+      },
+      "page_info": {
+        "title": "Connexion \u00e0 Roblox",
+        "language": "fr",
+        "status": "200",
+        "server": "Vercel",
+        "mime_type": "text/html",
+        "content_size_bytes": 15243,
+        "tls_valid_days": 89,
+        "domain_age_days": 168
+      },
+      "external_requests": [
+        {
+          "url": "https://api.ipify.org/?format=json",
+          "purpose": "Victim IP address harvesting via getUserIP() function at line 383",
+          "domain": "api.ipify.org",
+          "server": "cloudflare"
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Roblox_Logo_2025.png",
+          "purpose": "Loads official Roblox logo from Wikimedia Commons to appear legitimate",
+          "domain": "upload.wikimedia.org",
+          "size_bytes": 43193
+        },
+        {
+          "url": "https://discord.com/api/webhooks/1408202683021529099/b6VSQ72fPLL29P_W2sk-lgeWOa4Nk2fZOHDPAgukRaJMpGxVOrNdeON0dGc9LZdZYUz7",
+          "purpose": "CREDENTIAL EXFILTRATION — stolen credentials and victim IP sent to attacker-controlled Discord webhook",
+          "domain": "discord.com",
+          "discord_webhook_id": "1408202683021529099"
+        }
+      ],
+      "connected_domains": ["discord.com", "upload.wikimedia.org", "api.ipify.org"],
+      "connected_asns": ["AS13335 (Cloudflare — discord.com, ipify.org)", "AS14907 (Wikimedia)", "AS16509 (Amazon/Vercel)"],
+      "key_findings": "French-language Roblox credential harvester ('Connexion a Roblox') hosted on Vercel free tier. Page collects username/password, harvests victim IP via ipify.org, then exfiltrates all data through a Discord webhook (ID: 1408202683021529099). Uses Roblox logo from Wikimedia Commons. Detected by urlscan ML engine (score 91/100) and sourced from OpenPhish feed. All connections use TLS 1.3. Static single-page deployment with no server-side logic — purely client-side credential theft."
+    }
+  },
+  "exfiltration": {
+    "method": "Discord webhook (POST to discord.com/api/webhooks/...)",
+    "webhook_url": "https://discord.com/api/webhooks/1408202683021529099/b6VSQ72fPLL29P_W2sk-lgeWOa4Nk2fZOHDPAgukRaJMpGxVOrNdeON0dGc9LZdZYUz7",
+    "webhook_id": "1408202683021529099",
+    "data_collected": ["username", "password", "victim_ip_address"],
+    "ip_harvesting_service": "api.ipify.org",
+    "ip_harvesting_function": "getUserIP() at line 383 of inline script"
+  },
+  "interview_notes": {
+    "security_concepts": [
+      "Free-tier platform abuse: Vercel provides free hosting with automatic TLS, global CDN, and instant deployment — zero cost to the attacker for a fully functional phishing site with trusted HTTPS",
+      "Wildcard TLS certificate abuse: Vercel's *.vercel.app wildcard cert (issued by Google Trust Services WR1) gives every subdomain — including malicious ones — a valid, browser-trusted HTTPS certificate automatically. Victims see the green padlock.",
+      "Certificate Transparency limitations: crt.sh cannot index individual Vercel subdomains because they share a wildcard cert. This makes CT-based detection of new phishing subdomains impossible for Vercel-hosted sites.",
+      "Discord webhook as C2 channel: The attacker uses Discord's webhook API as a free, anonymous exfiltration endpoint. No server-side infrastructure needed — the phishing page is entirely static HTML/JS that POSTs stolen credentials directly to Discord.",
+      "Serverless/static deployment model: The entire phishing kit is a single HTML file with inline CSS/JS. No backend server, no database — Vercel serves it as a static asset from its edge CDN. This makes the attack infrastructure nearly disposable.",
+      "Anycast CDN obfuscation: Vercel's infrastructure resolves to Amazon AS16509 anycast IPs (216.198.79.195, 64.29.17.195) with no PTR records. The attacker's identity is completely obscured behind the platform.",
+      "Anti-forensics via CSS: The page uses anti-selection CSS (user-select: none) to make it harder for analysts to copy/inspect page content, a common phishing kit technique.",
+      "Client-side credential theft: All phishing logic runs in the victim's browser — ipify.org fetches their IP, then credentials + IP are bundled and sent to the Discord webhook. No server-side processing means no server logs to subpoena."
+    ],
+    "talking_points": [
+      "Detection approach: Monitor for Vercel subdomains with brand names (roblox, robux, etc.) in the subdomain string. The pattern 'www-roblox-com-*' is a classic typosquat/confusable format designed to look like a legitimate URL.",
+      "Reporting to Vercel: Submit abuse report to Vercel at vercel.com/abuse with the full URL and evidence. Vercel can take down the deployment. Also report the Discord webhook to Discord's Trust & Safety team to cut off the exfiltration channel.",
+      "Dual-platform takedown required: Both Vercel (hosting) AND Discord (exfiltration) must be notified. Killing only the Vercel site leaves the Discord webhook active for the attacker's next deployment. Killing only the webhook leaves the phishing page live to collect credentials (even if they can't be exfiltrated momentarily).",
+      "OpenPhish detection: This domain was automatically submitted to urlscan.io by the OpenPhish feed, showing the value of community threat intelligence feeds for detecting platform-hosted phishing.",
+      "French-language targeting: The page title 'Connexion a Roblox' and French UI text suggest the attacker is targeting French-speaking Roblox players — likely minors in France, Belgium, Switzerland, or French-speaking Africa. This narrows the attacker's likely origin or target demographic.",
+      "HSTS preload: Vercel's HSTS header (max-age=63072000; includeSubDomains; preload) means the site benefits from strict transport security. Ironically, this security feature helps the phishing site appear more trustworthy.",
+      "No direct DNS indicators: The subdomain has no individual TXT, NS, or AAAA records. All DNS is inherited from vercel.app. Traditional DNS-based threat intelligence (SPF, DKIM, DMARC analysis) is not applicable here.",
+      "Content hash for tracking: The page has etag d15a0fd1c74b2b16bd19ec8e0bd4b29d and content hash c0c9aede08cbcdf712b1b05296d884e0fa4dc350a5ccee89cfdcf78069557a2c — these can be used to track if the same phishing kit is deployed to other platforms."
+    ],
+    "notable_findings": [
+      "Discord webhook ID 1408202683021529099 is the exfiltration endpoint — stolen Roblox credentials and victim IPs are POSTed here. This webhook should be reported to Discord Trust & Safety immediately.",
+      "The phishing page calls getUserIP() at line 383 which fetches the victim's real IP from api.ipify.org before sending credentials to Discord. This means the attacker collects IP addresses alongside login credentials for potential account correlation or geo-targeting.",
+      "The page loads the official Roblox 2025 logo directly from Wikimedia Commons (upload.wikimedia.org/wikipedia/commons/1/1e/Roblox_Logo_2025.png) — a social engineering technique that uses a trusted CDN to serve brand assets, avoiding the need to host logo files.",
+      "urlscan.io ML engine scored this 91/100 for maliciousness, but the overall verdict was NOT flagged as malicious (overall score 0, malicious: false). This discrepancy shows a gap between ML detection and final verdict aggregation — the site was live and serving phishing content at scan time.",
+      "The Vercel deployment was last modified on 2026-02-03 (per Last-Modified header) and first deployed around 2026-02-02 (per urlscan response header). The domain age of 168 days refers to the parent vercel.app apex domain, not the subdomain's actual creation date.",
+      "All 5 HTTP requests from the page use TLS 1.3 with 100% secure connections. The phishing site benefits from Vercel's enterprise-grade security posture, making it indistinguishable from legitimate sites at the network layer.",
+      "The page is entirely static (15,243 bytes) served from Vercel's edge CDN with cache HIT status, meaning it's being served from Vercel's global CDN nodes with minimal latency — the same infrastructure used by legitimate companies."
+    ]
+  }
+}

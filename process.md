@@ -173,3 +173,58 @@ Tracks decisions, results, and notes as we execute the plan.
 - **Private server invite links** (5.7%) are the second most specific lure — attackers exploit the `?privateServerLinkCode=` parameter pattern.
 - **Very few login-page-only phishing** (0.5%) — most attackers create full-page clones of specific Roblox pages rather than generic login forms.
 - **Character substitution is rare** (1.1%) compared to ccTLD abuse — it's easier to register roblox.com.kz than to find an available misspelling of roblox.com.
+
+---
+
+## Phase 1: Infrastructure Reconnaissance — COMPLETE (Feb 7, 2026)
+
+### Tools Used
+
+| Tool | Purpose | Notes |
+|------|---------|-------|
+| `dig` | DNS resolution (A, AAAA, NS, MX, TXT records) | Used for all 5 domains |
+| `whois` | Domain registration data | Used for 3 registered domains (skipped Vercel/Netlify subdomains) |
+| `curl -sI -L` | HTTP response headers + redirect chains | Used for all 5 domains |
+| `openssl s_client` + `x509` | TLS certificate details (issuer, validity, SANs) | Used for all 5 domains |
+| `crt.sh` API | Certificate Transparency history | Used for all 5 domains; empty for wildcard-covered subdomains |
+| `ipinfo.io` API | IP geolocation, ASN, hosting provider | Used for all resolved IPs |
+| `dig -x` | Reverse DNS (PTR records) | Used for all resolved IPs |
+| `urlscan.io` API | Scan results, verdicts, external resources, screenshots | Used for 4 domains (3 with existing refs + 1 search query) |
+
+### Results
+
+**5 domain teardown JSONs** written to `data/teardowns/`.
+
+| Domain | Hosting | CDN | TLS Issuer | Registrar | Key Finding |
+|--------|---------|-----|------------|-----------|-------------|
+| `roblox-com.pl` | GitHub Pages | Fastly | Let's Encrypt R13 | OVH SAS (France) | CT logs link to `roblox-com.us` via shared SAN — same operator runs multiple ccTLD phishing domains. Two-phase operation: Jan 2023, then reactivated Nov 2025. Currently 404 (content removed, infra intact). |
+| `vercel.app` site | Vercel (free tier) | Vercel Edge | Google Trust Services (wildcard `*.vercel.app`) | N/A (subdomain) | Discord webhook exfiltration (`1408202683021529099`). Calls `api.ipify.org` for victim IP. Loads Roblox logo from Wikimedia. French-language targeting. |
+| `delta-executor.club` | Vercel (origin) | Cloudflare | Cloudflare (Google TS) + Let's Encrypt (origin) | Porkbun | Only 9 days old at analysis. Google Ads campaign (`AW-17524400036`) + GA4 (`G-1W5NLW24C4`) — attacker paying for ads. Google Site Verification TXT record. Cloudflare Email Routing configured. |
+| `rbux4aall.netlify.app` | Netlify (free tier) | Netlify Edge | DigiCert (wildcard `*.netlify.app`) | N/A (subdomain) | 204-day persistence without takedown. Multi-platform assets (Netlify + Cloudflare Pages + CloudFront + Giphy). CPA fraud indicators (`check.php` tracking). Fake testimonial images. |
+| `roblox.com.ge` | WIBO Baltic UAB (Frankfurt) | None | Let's Encrypt E8 | domenebi.ge (Georgian) | 28 CT certs reveal 3-phase lifecycle: (1) full cPanel phishing host 2022-2023, (2) revival mid-2024, (3) re-registered Aug 2025 by new operator using `eggywall.cc` infra for Discord OAuth theft via Vaultcord. 3,755 urlscan.io results. |
+
+### Decisions Made
+
+1. **WHOIS skipped for Vercel/Netlify subdomains** — returns Vercel Inc/Netlify Inc corporate data, not attacker data. Documented as "free-tier platform abuse."
+2. **roblox-com.pl currently returns 404** — phishing content was taken down (likely GitHub abuse report) but all infrastructure remains intact (DNS, TLS, email). This is itself a finding about takedown effectiveness.
+3. **roblox.com.ge had 3,755 urlscan.io results** — far more than expected. The domain has been heavily reported by OpenPhish.
+4. **delta-executor.club Google Ads ID is a strong attribution pivot** — requires payment method, potentially traceable.
+5. **Vaultcord infrastructure is separate** — `auth.immortal.rs` CNAMEs to `customers.vaultcord.com` on Vercel. Vaultcord is a third-party cybercrime-as-a-service for Discord OAuth theft.
+
+### Files Produced
+
+- `data/teardowns/roblox-com-pl.json` — 10.8 KB, GitHub Pages-hosted ccTLD login clone
+- `data/teardowns/vercel-app.json` — 12.0 KB, Vercel-hosted French credential harvester
+- `data/teardowns/delta-executor-club.json` — 16.4 KB, Cloudflare+Vercel malware distribution
+- `data/teardowns/rbux4aall-netlify.json` — 11.0 KB, Netlify-hosted free Robux scam
+- `data/teardowns/roblox-com-ge.json` — 20.5 KB, 3-phase domain lifecycle + Discord OAuth theft
+
+### Cross-Domain Observations
+
+- **3/5 domains use free hosting** — GitHub Pages (`roblox-com.pl`), Vercel (`vercel.app` site, + origin for `delta-executor.club`), Netlify (`rbux4aall`). Zero-cost phishing infrastructure is the norm.
+- **All 5 use free TLS** — Let's Encrypt (2), Google Trust Services via Cloudflare/Vercel wildcards (2), DigiCert via Netlify wildcard (1). Padlock icon means nothing for trust.
+- **Wildcard certs create CT blind spots** — `vercel.app` and `netlify.app` subdomains are invisible in Certificate Transparency logs because they ride parent wildcards. Only domains with their own registrations appear in crt.sh.
+- **Security headers uniformly absent** — None of the 5 domains serve CSP, X-Content-Type-Options, or Permissions-Policy. Only the platform-hosted sites (Vercel, Netlify) have HSTS — provided by the platform, not the attacker.
+- **3 distinct exfiltration mechanisms observed** — Discord webhook (Vercel site), form POST (roblox-com.pl), Discord OAuth redirect (roblox.com.ge). Phase 2 content analysis will map these fully.
+- **`eggywall.cc` is a phishing infrastructure service** — custom nameservers, `Apache/2.4.52 (Ubuntu)` with custom `Eggy-Wall: 10.0.0` header and `Abuse: abuse@eggywall.cc` contact. Worth deeper investigation.
+- **delta-executor.club is the most commercially operated** — Google Ads, GA4, Cloudflare Email Routing, Porkbun registration, all within 9 days of domain creation. This is a business, not a hobbyist.

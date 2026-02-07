@@ -1,0 +1,199 @@
+{
+  "domain": "roblox-com.pl",
+  "category": "ccTLD_login_clone",
+  "analysis_date": "2026-02-07",
+  "infrastructure": {
+    "ip_addresses": {
+      "A": [
+        "185.199.110.153",
+        "185.199.111.153",
+        "185.199.108.153",
+        "185.199.109.153"
+      ],
+      "AAAA": []
+    },
+    "nameservers": [
+      "dns16.ovh.net.",
+      "ns16.ovh.net."
+    ],
+    "mx_records": [
+      "1 mx1.mail.ovh.net.",
+      "5 mx2.mail.ovh.net.",
+      "100 mx3.mail.ovh.net."
+    ],
+    "txt_records": [
+      "v=spf1 include:mx.ovh.com -all",
+      "1|www.roblox-com.pl"
+    ],
+    "hosting_provider": "GitHub Pages (via Fastly CDN)",
+    "cdn": "Fastly (GitHub Pages infrastructure)",
+    "asn": "AS54113 Fastly, Inc.",
+    "geolocation": {
+      "city": "San Francisco",
+      "region": "California",
+      "country": "US",
+      "org": "AS54113 Fastly, Inc."
+    },
+    "reverse_dns": "cdn-185-199-110-153.github.com.",
+    "whois": {
+      "registrar": "OVH SAS, 2 Rue Kellermann, 59100 Roubaix, France",
+      "created": "2025-11-04 16:21:09",
+      "expires": "2026-11-04 16:21:09",
+      "updated": "2025-11-04 16:24:24",
+      "registrant": "individual (details redacted under .pl WHOIS policy)",
+      "nameservers_whois": [
+        "dns16.ovh.net.",
+        "ns16.ovh.net."
+      ],
+      "status": "ACTIVE",
+      "dnssec": "Unsigned",
+      "raw_excerpt": "DOMAIN NAME: roblox-com.pl | registrant type: individual | nameservers: dns16.ovh.net. ns16.ovh.net. | created: 2025.11.04 16:21:09 | last modified: 2025.11.04 16:24:24 | renewal date: 2026.11.04 16:21:09 | REGISTRAR: OVH SAS, 2 Rue Kellermann, 59100 Roubaix, France | Tel: +48.717500200"
+    },
+    "tls": {
+      "issuer": "C=US, O=Let's Encrypt, CN=R13",
+      "valid_from": "2026-01-19T11:37:13Z",
+      "valid_to": "2026-04-19T11:37:12Z",
+      "san_list": [
+        "roblox-com.pl",
+        "www.roblox-com.pl"
+      ],
+      "serial": "052f0e47fa30a01acad9ef0bd984cf88cf4a",
+      "signature_algorithm": "sha256WithRSAEncryption",
+      "key_size": "RSA 2048-bit",
+      "ct_logs": true
+    },
+    "http_headers": {
+      "status_code": 404,
+      "server": "GitHub.com",
+      "redirect_chain": [],
+      "security_headers_present": [
+        "Access-Control-Allow-Origin: *"
+      ],
+      "security_headers_missing": [
+        "Content-Security-Policy (CSP)",
+        "Strict-Transport-Security (HSTS)",
+        "X-Frame-Options",
+        "X-Content-Type-Options",
+        "X-XSS-Protection",
+        "Referrer-Policy",
+        "Permissions-Policy"
+      ],
+      "cookies": [],
+      "notable_headers": {
+        "server": "GitHub.com",
+        "via": "1.1 varnish",
+        "x-served-by": "cache-pao-kpao1770061-PAO",
+        "x-cache": "MISS",
+        "x-cache-hits": "0",
+        "x-proxy-cache": "MISS",
+        "x-github-request-id": "7CFE:2AFD0F:DC293A:FEC335:6987A152",
+        "x-fastly-request-id": "53f1487efc8001573af56b148dd1d6ac41428611",
+        "access-control-allow-origin": "*",
+        "vary": "Accept-Encoding",
+        "content-type": "text/html; charset=utf-8"
+      }
+    },
+    "crtsh": {
+      "first_seen": "2023-01-27T17:00:27.889",
+      "total_certs": 7,
+      "cert_history": [
+        {
+          "id": 8520685013,
+          "issuer": "C=AT, O=ZeroSSL, CN=ZeroSSL RSA Domain Secure Site CA",
+          "common_name": "roblox-com.pl",
+          "not_before": "2023-01-27T00:00:00",
+          "not_after": "2023-04-27T23:59:59",
+          "serial": "7a8a2fef79290c42f14689be8f60b984",
+          "entry_timestamp": "2023-01-27T17:00:27.889"
+        },
+        {
+          "id": 8528557174,
+          "issuer": "C=US, O=Let's Encrypt, CN=R3",
+          "common_name": "roblox-com.us",
+          "name_value": "roblox-com.pl",
+          "not_before": "2023-01-29T16:34:36",
+          "not_after": "2023-04-29T16:34:35",
+          "serial": "03c544a73fa07aa3ee86199a06c5abfdc30c",
+          "entry_timestamp": "2023-01-29T17:34:36.206",
+          "note": "Cross-cert: roblox-com.us SAN includes roblox-com.pl, linking both domains to same operator"
+        },
+        {
+          "id": 8532881143,
+          "issuer": "C=US, O=Let's Encrypt, CN=R3",
+          "common_name": "www.roblox-com.pl",
+          "not_before": "2023-01-29T18:48:28",
+          "not_after": "2023-04-29T18:48:27",
+          "serial": "0448e7a2ab91025508407e45c11a389eb1b0",
+          "entry_timestamp": "2023-01-29T19:48:28.323"
+        },
+        {
+          "id": 8613820250,
+          "issuer": "C=US, O=Let's Encrypt, CN=R3",
+          "common_name": "roblox-com.pl",
+          "not_before": "2023-02-09T11:01:40",
+          "not_after": "2023-05-10T11:01:39",
+          "serial": "03f476b0769e6f96175cf29e6fcdfd3c743f",
+          "entry_timestamp": "2023-02-09T12:01:40.471"
+        },
+        {
+          "id": 8662685162,
+          "issuer": "C=US, O=Let's Encrypt, CN=R3",
+          "common_name": "roblox-com.pl",
+          "not_before": "2023-02-15T19:35:23",
+          "not_after": "2023-05-16T19:35:22",
+          "serial": "04707b61cdc8f1530f742d9ca3c4ad7d51e6",
+          "entry_timestamp": "2023-02-15T20:35:24.148"
+        },
+        {
+          "id": 22618305949,
+          "issuer": "C=US, O=Let's Encrypt, CN=R13",
+          "common_name": "roblox-com.pl",
+          "not_before": "2025-11-20T12:16:13",
+          "not_after": "2026-02-18T12:16:12",
+          "serial": "0631e2813bed2b1a8e6508962a9ec4d79f55",
+          "entry_timestamp": "2025-11-20T13:14:43.844"
+        },
+        {
+          "id": 23860046676,
+          "issuer": "C=US, O=Let's Encrypt, CN=R13",
+          "common_name": "roblox-com.pl",
+          "not_before": "2026-01-19T11:37:13",
+          "not_after": "2026-04-19T11:37:12",
+          "serial": "052f0e47fa30a01acad9ef0bd984cf88cf4a",
+          "entry_timestamp": "2026-01-19T12:35:44.069"
+        }
+      ]
+    }
+  },
+  "interview_notes": {
+    "security_concepts": [
+      "ccTLD abuse: Using Polish .pl TLD to impersonate roblox.com via a hyphenated lookalike domain (roblox-com.pl)",
+      "GitHub Pages hosting abuse: Attacker leveraged free GitHub Pages hosting (185.199.108-111.153) to serve phishing content at zero cost with high uptime and built-in HTTPS",
+      "Let's Encrypt certificate abuse: Free DV certificate provides HTTPS padlock icon, demonstrating that padlock != trustworthy -- it only means encrypted transport, not site legitimacy",
+      "Domain registrar obfuscation: OVH SAS registrar with individual registrant type and Polish WHOIS redaction makes attacker attribution difficult",
+      "SPF record configuration: Attacker set up SPF (v=spf1 include:mx.ovh.com -all) and MX records, suggesting potential for credential-harvesting email campaigns or receiving exfiltrated data via email",
+      "TXT record redirect hint: The TXT record '1|www.roblox-com.pl' is an OVH-specific redirect indicator pointing bare domain to www subdomain",
+      "Certificate Transparency as OSINT: CT logs revealed the full timeline of the domain's phishing operations and linked it to a sibling domain roblox-com.us",
+      "Infrastructure commoditization: The entire phishing stack (OVH domain, GitHub Pages hosting, Let's Encrypt TLS) costs effectively nothing, lowering the barrier to entry for phishing campaigns"
+    ],
+    "talking_points": [
+      "The domain resolves to GitHub Pages IPs (185.199.108-111.153) with reverse DNS confirming cdn-185-199-110-153.github.com -- this means the attacker is hosting their phishing kit as a GitHub Pages site, abusing GitHub's free hosting infrastructure",
+      "Currently returning HTTP 404, indicating the phishing content has been taken down (likely via GitHub abuse report) but the domain infrastructure remains active with valid DNS, WHOIS, and a current TLS certificate",
+      "Certificate Transparency reveals two distinct operational periods: an initial campaign in January-February 2023 (4 certs across 3 weeks), then a ~2.5 year dormancy period, followed by reactivation in November 2025. This pattern suggests either a persistent threat actor reusing infrastructure or a domain that was re-registered",
+      "WHOIS shows domain was created 2025-11-04, but CT logs show certificates from January 2023 -- this means the domain was previously registered, expired, and was re-registered (potentially by the same or different operator)",
+      "A critical CT log finding: a January 2023 certificate for 'roblox-com.us' included 'roblox-com.pl' as a SAN, directly linking both phishing domains to the same operator running parallel ccTLD phishing campaigns (.pl and .us)",
+      "Missing ALL standard security headers (CSP, HSTS, X-Frame-Options, X-Content-Type-Options) -- while GitHub Pages provides minimal headers, a legitimate site would have these, and their absence is consistent with a hastily deployed phishing page",
+      "The OVH nameservers (dns16.ovh.net, ns16.ovh.net) combined with OVH MX records show the attacker used a single provider (OVH) for domain registration, DNS, and email, then pointed the A records to GitHub Pages for free static hosting",
+      "Let's Encrypt R3 -> R13 issuer migration between the two operational periods reflects Let's Encrypt's own infrastructure changes, not an attacker action"
+    ],
+    "notable_findings": [
+      "CROSS-DOMAIN LINK: CT logs reveal roblox-com.us was issued a certificate that included roblox-com.pl as a SAN (2023-01-29), proving the same operator runs phishing campaigns across multiple ccTLDs",
+      "TWO-PHASE OPERATION: The domain shows a Jan-Feb 2023 campaign phase (ZeroSSL + Let's Encrypt R3 certs), a ~2.5 year gap, then reactivation Nov 2025 (Let's Encrypt R13) -- the WHOIS creation date of 2025-11-04 confirms re-registration",
+      "CURRENTLY 404: Despite having valid DNS, active WHOIS, and a current TLS cert (valid until April 2026), the site returns a GitHub Pages 404, suggesting recent takedown of the phishing content but persistence of the supporting infrastructure",
+      "FULL EMAIL INFRASTRUCTURE: MX records pointing to OVH mail servers plus SPF records suggest the attacker configured email capability, possibly for receiving stolen credentials or sending phishing lures from the lookalike domain",
+      "ZERO-COST ATTACK STACK: Domain (~$5/year via OVH), hosting (free GitHub Pages), TLS (free Let's Encrypt), email (free OVH MX) -- total cost under $10/year for a credible phishing operation",
+      "ANYCAST IP: ipinfo.io confirms the GitHub Pages IPs are anycast, meaning the phishing content was served from edge locations worldwide for low latency -- ironically better infrastructure than many legitimate sites",
+      "VARNISH/FASTLY CACHING: The x-served-by and via headers show Fastly/Varnish CDN caching in front of GitHub Pages, giving the phishing site enterprise-grade performance and DDoS protection for free"
+    ]
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "domain": "delta-executor.club",
+  "category": "malware_distribution",
+  "analysis_date": "2026-02-07",
+  "urlscan_ref": "019c25c4-0a3b-77b8-a0d7-f897506e65a9",
+  "infrastructure": {
+    "ip_addresses": {
+      "A": ["104.21.85.116", "172.67.205.148"],
+      "AAAA": ["2606:4700:3035::ac43:cd94", "2606:4700:3034::6815:5574"]
+    },
+    "nameservers": ["marty.ns.cloudflare.com", "ingrid.ns.cloudflare.com"],
+    "mx_records": [
+      "33 route3.mx.cloudflare.net",
+      "62 route1.mx.cloudflare.net",
+      "65 route2.mx.cloudflare.net"
+    ],
+    "txt_records": [
+      "v=spf1 include:_spf.mx.cloudflare.net ~all",
+      "google-site-verification=UHcYiPwPIbjKzkjvJwD7mZhV-AoJ5SFBAQxuDPNlAhk"
+    ],
+    "hosting_provider": "Vercel (origin), Cloudflare (CDN/proxy)",
+    "cdn": "Cloudflare",
+    "asn": "AS13335 CLOUDFLARENET - Cloudflare, Inc., US",
+    "geolocation": {
+      "city": "San Francisco",
+      "region": "California",
+      "country": "US",
+      "org": "AS13335 Cloudflare, Inc."
+    },
+    "reverse_dns": "none (no PTR records for Cloudflare anycast IPs)",
+    "whois": {
+      "registrar": "Porkbun",
+      "created": "2026-01-29T03:26:56Z",
+      "expires": "2027-01-29T03:26:56Z",
+      "updated": "2026-02-03T03:26:59Z",
+      "registrant": "Private by Design, LLC (WHOIS privacy via Porkbun, NC, US)",
+      "nameservers_whois": ["marty.ns.cloudflare.com", "ingrid.ns.cloudflare.com"],
+      "status": "clientTransferProhibited, clientDeleteProhibited, serverTransferProhibited",
+      "raw_excerpt": "Domain Name: delta-executor.club | Registry Domain ID: REDACTED FOR PRIVACY | Registrar: Porkbun | Registrar IANA ID: 1861 | Registrar Abuse Contact Email: abuse@porkbun.com | Creation Date: 2026-01-29T03:26:56Z | Registry Expiry Date: 2027-01-29T03:26:56Z | Registrant Organization: Private by Design, LLC | DNSSEC: unsigned"
+    },
+    "tls": {
+      "issuer": "C=US, O=Google Trust Services, CN=WE1",
+      "valid_from": "2026-01-29T02:37:22Z",
+      "valid_to": "2026-04-29T03:36:13Z",
+      "san_list": ["delta-executor.club", "*.delta-executor.club"],
+      "serial": "04:23:ba:e1:1e:0c:bd:0e:0e:6c:4f:7b:d2:b8:ea:7a",
+      "signature_algorithm": "ecdsa-with-SHA256"
+    },
+    "http_headers": {
+      "server": "cloudflare",
+      "redirect_chain": [
+        "http://delta-executor.club/ -> 307 (HTTPS upgrade) -> https://delta-executor.club/ -> 200"
+      ],
+      "security_headers_present": [
+        "strict-transport-security: max-age=63072000",
+        "access-control-allow-origin: *"
+      ],
+      "security_headers_missing": [
+        "content-security-policy",
+        "x-content-type-options",
+        "x-frame-options",
+        "x-xss-protection",
+        "referrer-policy",
+        "permissions-policy"
+      ],
+      "cookies": [],
+      "notable_headers": {
+        "x-vercel-cache": "HIT",
+        "x-vercel-id": "sfo1::xt2kp-1770496338995-a4c308741d6b",
+        "x-matched-path": "/",
+        "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "9ca5a7e69c881fdb-SJC",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "age": "816163",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}"
+      }
+    },
+    "crtsh": {
+      "first_seen": "2026-01-29T03:37:23Z",
+      "total_certs": 6,
+      "cert_history": [
+        {
+          "id": 24073246126,
+          "issuer": "C=US, O=Google Trust Services, CN=WE1",
+          "common_name": "delta-executor.club",
+          "san": "*.delta-executor.club, delta-executor.club",
+          "not_before": "2026-01-29T02:37:22",
+          "not_after": "2026-04-29T03:36:13",
+          "serial": "0423bae11e0cbd0e0e6c4f7bd2b8ea7a",
+          "entry_timestamp": "2026-01-30T07:22:17.018",
+          "note": "Google Trust Services cert via Cloudflare Universal SSL (current)"
+        },
+        {
+          "id": 24053992612,
+          "issuer": "C=US, O=Let's Encrypt, CN=R12",
+          "common_name": "delta-executor.club",
+          "san": "delta-executor.club",
+          "not_before": "2026-01-29T08:12:39",
+          "not_after": "2026-04-29T08:12:38",
+          "serial": "05e2a8d598ea0254c63bc06166eec40b7704",
+          "entry_timestamp": "2026-01-29T09:11:09.624",
+          "note": "Let's Encrypt cert, likely from Vercel origin server"
+        },
+        {
+          "id": 24053990700,
+          "issuer": "C=US, O=Let's Encrypt, CN=R12",
+          "common_name": "delta-executor.club",
+          "san": "delta-executor.club",
+          "not_before": "2026-01-29T08:12:39",
+          "not_after": "2026-04-29T08:12:38",
+          "serial": "05e2a8d598ea0254c63bc06166eec40b7704",
+          "entry_timestamp": "2026-01-29T09:11:09.157",
+          "note": "Duplicate CT log entry for same Let's Encrypt cert"
+        },
+        {
+          "id": 24048772892,
+          "issuer": "C=GB, O=Sectigo Limited, CN=Sectigo Public Server Authentication CA DV E36",
+          "common_name": "delta-executor.club",
+          "san": "*.delta-executor.club, delta-executor.club",
+          "not_before": "2026-01-29T00:00:00",
+          "not_after": "2026-04-29T03:36:14",
+          "serial": "3f94f783d79d482ce05ce0b31e3cf828",
+          "entry_timestamp": "2026-01-29T03:38:27.422",
+          "note": "Sectigo cert, Cloudflare Universal SSL backup CA"
+        },
+        {
+          "id": 24048772642,
+          "issuer": "C=GB, O=Sectigo Limited, CN=Sectigo Public Server Authentication CA DV E36",
+          "common_name": "delta-executor.club",
+          "san": "*.delta-executor.club, delta-executor.club",
+          "not_before": "2026-01-29T00:00:00",
+          "not_after": "2026-04-29T03:36:14",
+          "serial": "3f94f783d79d482ce05ce0b31e3cf828",
+          "entry_timestamp": "2026-01-29T03:38:26.418",
+          "note": "Duplicate CT log entry for same Sectigo cert"
+        },
+        {
+          "id": 24048745883,
+          "issuer": "C=US, O=Google Trust Services, CN=WE1",
+          "common_name": "delta-executor.club",
+          "san": "*.delta-executor.club, delta-executor.club",
+          "not_before": "2026-01-29T02:37:22",
+          "not_after": "2026-04-29T03:36:13",
+          "serial": "0423bae11e0cbd0e0e6c4f7bd2b8ea7a",
+          "entry_timestamp": "2026-01-29T03:37:23.183",
+          "note": "First CT log entry -- Google Trust Services cert via Cloudflare"
+        }
+      ]
+    },
+    "urlscan_data": {
+      "scan_date": "2026-02-03T23:08:59.877Z",
+      "screenshot_url": "https://urlscan.io/screenshots/019c25c4-0a3b-77b8-a0d7-f897506e65a9.png",
+      "page_title": "Secure Cross-Platform Roblox Executor | deltaexecutor.club",
+      "verdict": "Not flagged as malicious by urlscan engines (score: 0), but ML engine tagged (urlscan-ml-0.1.0-1-d9114fd with score -90). No community votes yet. Domain age was only 5 days at scan time.",
+      "technologies_detected": [
+        "Next.js (via Vary RSC headers and _next/ static chunks)",
+        "Vercel (x-vercel-cache, x-vercel-id headers)",
+        "Cloudflare CDN/proxy (CF headers, Browser Insights beacon)",
+        "Google Analytics (G-1W5NLW24C4)",
+        "Google Tag Manager",
+        "Google Ads (AW-17524400036 conversion tracking)",
+        "DoubleClick Floodlight (ad tracking)",
+        "Microsoft Clarity (clarity.ms/tag/undefined)"
+      ],
+      "third_party_domains": [
+        "www.googletagmanager.com",
+        "www.google-analytics.com",
+        "googleads.g.doubleclick.net",
+        "www.google.com",
+        "www.google.ca",
+        "www.clarity.ms",
+        "static.cloudflareinsights.com"
+      ],
+      "total_requests": 25,
+      "total_size_bytes": 1564929,
+      "protocols": ["h3 (QUIC)", "h2", "http/1.1"],
+      "google_ads_id": "AW-17524400036",
+      "google_analytics_id": "G-1W5NLW24C4",
+      "key_findings": "Polished Next.js app hosted on Vercel, proxied through Cloudflare. Domain was only 5 days old at scan time (created 2026-01-29). Running Google Ads campaigns (AW-17524400036) and tracking with GA4 + Microsoft Clarity, indicating monetization through ad revenue or paid traffic acquisition to push malware downloads. Cloudflare email-decode.min.js present suggests email obfuscation. Page title explicitly markets itself as a 'Secure Cross-Platform Roblox Executor'."
+    }
+  },
+  "interview_notes": {
+    "security_concepts": [
+      "DNS infrastructure analysis: Using dig to enumerate A, AAAA, NS, MX, TXT records to map the attack surface and identify hosting providers (Cloudflare), mail infrastructure, and SPF/DKIM configurations",
+      "Cloudflare as a reverse proxy: Cloudflare anycast IPs (104.21.x.x, 172.67.x.x) mask the true origin server IP, making takedown and attribution harder. No reverse DNS (PTR) records exist for these shared anycast addresses.",
+      "Certificate Transparency (CT): CT logs reveal the domain's entire TLS certificate history. Three distinct CAs issued certs on the same day (Google Trust Services, Sectigo, Let's Encrypt), showing Cloudflare's multi-CA redundancy and Vercel's independent cert provisioning.",
+      "WHOIS privacy and registrar choice: Porkbun with 'Private by Design, LLC' privacy service. Domain registered 2026-01-29 -- only 9 days old at analysis time. The .club gTLD costs real money (~$5-10/year), unlike free subdomains.",
+      "HTTP header fingerprinting: x-vercel-cache and x-vercel-id headers definitively identify Vercel as the origin hosting platform, while Cloudflare sits in front as a CDN/proxy layer. The Vary header containing RSC, Next-Router-State-Tree confirms this is a Next.js App Router application.",
+      "Origin server discovery: Despite Cloudflare proxying, the Let's Encrypt R12 cert in CT logs (without wildcard) was likely provisioned by Vercel independently, confirming the dual-layer architecture.",
+      "Missing security headers: No Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, or Permissions-Policy headers are set, which is typical for hastily-deployed malicious sites despite the polished front-end.",
+      "Ad tracking as intelligence: Google Ads conversion ID (AW-17524400036) and GA4 property (G-1W5NLW24C4) are pivotable identifiers. The attacker is running paid Google Ads campaigns to drive traffic, meaning they are investing money into victim acquisition.",
+      "SPF and email infrastructure: Cloudflare Email Routing MX records plus SPF including _spf.mx.cloudflare.net indicate the attacker set up email capability, possibly for customer support impersonation or receiving download confirmations.",
+      "Google Site Verification: The TXT record google-site-verification=UHcYiPwPIbjKzkjvJwD7mZhV-AoJ5SFBAQxuDPNlAhk confirms the attacker verified ownership with Google, likely for Google Search Console and/or Google Ads account setup."
+    ],
+    "talking_points": [
+      "Layered infrastructure sophistication: This is not a script kiddie operation. The attacker deployed a Next.js App Router site on Vercel (free tier), put it behind Cloudflare (free tier), registered a paid .club domain via Porkbun with WHOIS privacy, set up Cloudflare email routing, configured Google Analytics + Google Ads + Microsoft Clarity, and verified the domain with Google -- all within hours of registration.",
+      "Cost-benefit analysis of the attack: The .club TLD costs money (~$5-10/year), Google Ads campaigns cost per click, and Porkbun WHOIS privacy is included free. The attacker is investing real dollars to acquire victims, suggesting the malware payload is highly profitable (info-stealers, crypto miners, or ransomware).",
+      "Trust exploitation targeting minors: The page title 'Secure Cross-Platform Roblox Executor' deliberately uses the word 'Secure' to build false trust. Roblox's primary demographic is children aged 9-15, making this a particularly predatory operation. Malware executors/cheats exploit the desire for unfair advantages in gaming.",
+      "Cloudflare as a double-edged sword: Cloudflare's free tier gives attackers enterprise-grade DDoS protection, global CDN, TLS termination, and IP masking. This makes the malicious site faster and more reliable than many legitimate sites, while hiding the origin server from investigators and law enforcement.",
+      "Vercel platform abuse: The x-vercel-id header (sfo1 region) and Vercel cache headers confirm the site is hosted on Vercel's free tier. Vercel provides automatic TLS, global CDN, and serverless functions -- all abused here for malware distribution. The Let's Encrypt cert from Vercel in CT logs corroborates this.",
+      "Pivoting opportunities: The Google Ads ID AW-17524400036 and GA4 ID G-1W5NLW24C4 can be used to discover other domains operated by the same threat actor. Google Ads accounts require payment methods, creating a potential attribution vector for law enforcement.",
+      "Domain age as a red flag: The domain was only 5 days old at urlscan scan time, and 9 days old at analysis time. Combined with the .club TLD and executor-themed naming, this is a strong phishing/malware indicator. Automated detection systems should flag newly-registered domains serving executable downloads.",
+      "Microsoft Clarity tracking (clarity.ms/tag/undefined): The Clarity tag was set to 'undefined', suggesting hasty deployment or template reuse where the project ID was not properly configured. This is a common fingerprint of mass-produced phishing kits.",
+      "Takedown vectors: Abuse reports can be filed with Porkbun (abuse@porkbun.com), Cloudflare, Vercel, and Google Ads. The Google Site Verification and Ads account create additional reporting surfaces. The .club registry (GoDaddy Registry) also accepts abuse reports.",
+      "SEO and paid acquisition strategy: The google-site-verification TXT record, Google Ads conversion tracking, and professional page title suggest the attacker is using both organic SEO and paid search ads to reach victims searching for 'delta executor download' or similar queries."
+    ],
+    "notable_findings": [
+      "Domain delta-executor.club registered 2026-01-29 via Porkbun with WHOIS privacy -- only 9 days old at analysis time",
+      "Dual-layer hosting architecture: Next.js on Vercel (origin) with Cloudflare CDN/proxy in front, giving the attacker both platforms' free-tier protections",
+      "Three distinct TLS certificate authorities issued certs on the same day (Jan 29): Google Trust Services (Cloudflare), Sectigo (Cloudflare backup), and Let's Encrypt (Vercel) -- visible in CT logs",
+      "Active Google Ads campaign (AW-17524400036) means the attacker is paying money to push malware distribution ads, indicating organized and profitable operation",
+      "Google Analytics G-1W5NLW24C4 and Microsoft Clarity deployed for visitor analytics -- attacker is measuring conversion rates of malware downloads",
+      "Cloudflare Email Routing configured (MX records + SPF) giving the attacker email capability on the phishing domain",
+      "Google Site Verification completed (TXT record) confirming the attacker set up Google Search Console and/or Google Ads for this domain",
+      "Cloudflare email-decode.min.js loaded on the page, obfuscating any email addresses shown to scrapers while displaying them to visitors",
+      "No reverse DNS (PTR) records for the Cloudflare anycast IPs, which is standard for Cloudflare but prevents reverse-DNS-based attribution",
+      "Missing all standard security headers (CSP, X-Content-Type-Options, X-Frame-Options) despite the 'Secure' branding in the page title -- ironic gap between claimed and actual security",
+      "Microsoft Clarity tag set to 'undefined' -- likely a copy-paste error from a phishing kit template, suggesting this is one instance of a mass-produced operation",
+      "x-vercel-id: sfo1 prefix indicates the Vercel deployment is in the San Francisco region (us-west-1)",
+      "The age header value of 816163 seconds (~9.4 days) indicates the cached content has been served since approximately the domain's creation date, suggesting the site content has not changed since initial deployment",
+      "All 25 HTTP requests from the page were served over TLS (100% secure), using QUIC/h3, h2, and TLS 1.2/1.3 protocols -- the attacker's infrastructure is ironically more modern than many legitimate websites"
+    ]
+  }
+}

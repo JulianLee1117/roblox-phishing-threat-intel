@@ -1,0 +1,175 @@
+{
+  "domain": "rbux4aall.netlify.app",
+  "category": "free_robux_scam",
+  "analysis_date": "2026-02-07",
+  "urlscan_ref": "019c2c79-7f10-70ca-aeac-3cb1ef689fde",
+  "infrastructure": {
+    "ip_addresses": {
+      "A": ["13.52.188.95", "52.52.192.191"],
+      "AAAA": ["2600:1f1c:446:4900::258", "2600:1f1c:446:4900::259"]
+    },
+    "nameservers": [
+      "dns1.p01.nsone.net",
+      "dns2.p01.nsone.net",
+      "dns3.p01.nsone.net",
+      "dns4.p01.nsone.net"
+    ],
+    "txt_records": [],
+    "hosting_provider": "Netlify",
+    "hosting_tier": "free",
+    "cdn": "Netlify Edge (backed by AWS / Amazon CloudFront)",
+    "asn": "AS16509 Amazon.com, Inc.",
+    "geolocation": {
+      "city": "San Jose",
+      "region": "California",
+      "country": "US",
+      "org": "AS16509 Amazon.com, Inc."
+    },
+    "reverse_dns": [
+      "ec2-13-52-188-95.us-west-1.compute.amazonaws.com",
+      "ec2-52-52-192-191.us-west-1.compute.amazonaws.com"
+    ],
+    "whois": "Netlify subdomain — WHOIS not applicable (free-tier platform abuse)",
+    "tls": {
+      "issuer": "C=US, O=DigiCert Inc, CN=DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+      "valid_from": "2025-01-31T00:00:00Z",
+      "valid_to": "2026-03-03T23:59:59Z",
+      "san_list": ["*.netlify.app", "netlify.app"],
+      "serial": "04:e8:76:1c:31:4b:51:9e:75:e9:35:81:a8:4a:38:3a",
+      "signature_algorithm": "sha256WithRSAEncryption",
+      "public_key_algorithm": "ECDSA (P-256)",
+      "subject": "C=US, ST=California, L=San Francisco, O=Netlify, Inc, CN=*.netlify.app",
+      "note": "Wildcard certificate covers ALL netlify.app subdomains — attacker gets trusted TLS for free"
+    },
+    "http_headers": {
+      "server": "Netlify",
+      "status_code": 200,
+      "redirect_chain": [
+        "http://rbux4aall.netlify.app/ -> 307 Internal Redirect (HSTS) -> https://rbux4aall.netlify.app/ -> 200 OK"
+      ],
+      "security_headers_present": [
+        "strict-transport-security: max-age=31536000; includeSubDomains; preload"
+      ],
+      "security_headers_missing": [
+        "content-security-policy",
+        "x-content-type-options",
+        "x-frame-options",
+        "x-xss-protection",
+        "referrer-policy",
+        "permissions-policy"
+      ],
+      "cookies": [],
+      "notable_headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "public,max-age=0,must-revalidate",
+        "cache-status": "\"Netlify Edge\"; hit",
+        "content-type": "text/html; charset=UTF-8",
+        "etag": "\"fb34dc5bb222bd3a76956c6d708cb27f-ssl\"",
+        "x-nf-request-id": "01KGWWW0FQKE1B8ENXMB2VK85N",
+        "content-length": "15012"
+      }
+    },
+    "crtsh": {
+      "first_seen": "N/A — subdomain uses Netlify wildcard cert (*.netlify.app); no individual cert issued",
+      "total_certs": 0,
+      "cert_history": [],
+      "note": "crt.sh returns empty for this subdomain because Netlify uses a shared wildcard certificate (*.netlify.app) issued by DigiCert. Individual subdomain certificates are not logged in CT logs."
+    },
+    "urlscan_data": {
+      "scan_date": "2026-02-05T06:24:51.960Z",
+      "scan_ip": "35.157.26.135",
+      "scan_ip_location": "Frankfurt am Main, Germany (AWS eu-central-1)",
+      "screenshot_url": "https://urlscan.io/screenshots/019c2c79-7f10-70ca-aeac-3cb1ef689fde.png",
+      "report_url": "https://urlscan.io/result/019c2c79-7f10-70ca-aeac-3cb1ef689fde/",
+      "dom_url": "https://urlscan.io/dom/019c2c79-7f10-70ca-aeac-3cb1ef689fde/",
+      "page_title": "Roblox",
+      "page_language": "en",
+      "verdict": {
+        "overall_score": 0,
+        "malicious": false,
+        "engine_score": -82,
+        "engine_tags": ["urlscan-ml", "urlscan-ml-0.1.0-1-d9114fd"],
+        "community_votes_malicious": 0,
+        "community_votes_benign": 0,
+        "note": "Not flagged as malicious by urlscan.io automated engines — demonstrates how free-tier scams evade detection"
+      },
+      "domains_contacted": [
+        "rbux4aall.netlify.app",
+        "fonts.googleapis.com",
+        "dfmpe7igjx4jo.cloudfront.net",
+        "media0.giphy.com",
+        "zr-dqb.pages.dev",
+        "images.rbxcdn.com",
+        "fonts.gstatic.com",
+        "d1y3y09sav47f5.cloudfront.net",
+        "s10.histawts.com"
+      ],
+      "external_resources": {
+        "roblox_cdn_assets": [
+          "https://images.rbxcdn.com/9a75b1267d260322206e98bd256138d4-premium_title_bg.jpg"
+        ],
+        "cloudflare_pages_assets": [
+          "https://zr-dqb.pages.dev/robux-removebg-preview.png"
+        ],
+        "giphy_assets": [
+          "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3N0cWlyZG83amlvcXVnOXMxNGRjOHJyNXFmbjB3Nnk1NXc4cDFkNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/1QcqLUCuQca1edQ0rK/giphy.webp"
+        ],
+        "suspicious_scripts": [
+          "https://dfmpe7igjx4jo.cloudfront.net/9621def.js",
+          "https://s10.histawts.com/js15_as.js",
+          "https://d1y3y09sav47f5.cloudfront.net/hVLBFSu3YKQ.4507479.86cfc.0.js"
+        ],
+        "suspicious_tracking": [
+          "https://d1y3y09sav47f5.cloudfront.net/public/external/check.php?it=4507479&time=1770272688538"
+        ],
+        "css_resources": [
+          "https://d1y3y09sav47f5.cloudfront.net/public/external/css_frontXF.css",
+          "https://d1y3y09sav47f5.cloudfront.net/public/clockers/PrimeApps/cssXF.css"
+        ]
+      },
+      "self_hosted_images": [
+        "https://rbux4aall.netlify.app/sara1.png",
+        "https://rbux4aall.netlify.app/samue.png"
+      ],
+      "technologies_detected": ["Netlify (PaaS + CDN)"],
+      "total_requests": 16,
+      "total_data_size_bytes": 617289,
+      "protocols_used": ["h2", "h3"],
+      "domain_age_days": 204,
+      "key_findings": "Roblox Premium-themed scam page hosted on Netlify free tier. Loads legitimate rbxcdn.com background image (premium_title_bg.jpg) to appear authentic. Uses Cloudflare Pages (zr-dqb.pages.dev) for additional assets. Loads suspicious JavaScript from CloudFront distributions (dfmpe7igjx4jo, d1y3y09sav47f5) and histawts.com ad/tracking network. Includes check.php tracking endpoint. Self-hosts fake testimonial images (sara1.png, samue.png). Not flagged by any urlscan.io engine despite clear scam indicators."
+    }
+  },
+  "interview_notes": {
+    "security_concepts": [
+      "Free-tier platform abuse: Netlify provides automatic TLS (via shared wildcard cert), global CDN, and static hosting at zero cost — the attacker has zero infrastructure investment",
+      "Wildcard TLS certificates: Netlify's *.netlify.app DigiCert wildcard cert gives every subdomain a green padlock, making phishing sites appear 'secure' to victims",
+      "Domain reputation parasitism: rbux4aall.netlify.app inherits netlify.app's domain reputation, making it harder for URL filters to block without risking false positives on legitimate Netlify sites",
+      "Trust exploitation via legitimate CDN assets: Loading the real Roblox Premium background image from images.rbxcdn.com creates visual authenticity without hosting the asset",
+      "Cross-platform asset hosting: Assets split across Netlify, Cloudflare Pages (zr-dqb.pages.dev), CloudFront distributions, and Giphy — all free-tier services — making takedown require contacting multiple providers",
+      "CT log evasion: Because Netlify uses a shared wildcard certificate, individual phishing subdomains do not appear in Certificate Transparency logs, eliminating a major detection signal",
+      "HSTS preloading: Netlify's HSTS with preload means even the HTTP->HTTPS redirect is handled by the browser internally (307 Internal Redirect), adding another layer of apparent security"
+    ],
+    "talking_points": [
+      "Domain naming analysis: 'rbux4aall' decodes to 'Robux for all' — a social engineering lure specifically targeting children/young Roblox players who want free premium currency",
+      "Detection gap: urlscan.io's ML engine scored this at -82 (not malicious) and zero community votes flagged it — demonstrating how simple static scam pages evade automated detection",
+      "Fake social proof: Self-hosted images sara1.png and samue.png are likely fabricated user testimonials designed to build trust, a classic scam pattern",
+      "Suspicious JavaScript pipeline: The site loads JS from dfmpe7igjx4jo.cloudfront.net and d1y3y09sav47f5.cloudfront.net (randomized CloudFront distributions), plus histawts.com (known ad/tracking domain) — suggesting CPA/affiliate fraud or credential harvesting backend",
+      "check.php tracking endpoint: The call to d1y3y09sav47f5.cloudfront.net/public/external/check.php with 'it' and 'time' parameters indicates victim tracking/counting infrastructure, common in CPA (Cost Per Action) scam networks",
+      "Reporting to Netlify: Submit abuse report at https://www.netlify.com/abuse/ with the domain, urlscan screenshot, and description of the scam. Netlify typically responds to abuse reports within 24-48 hours for clear ToS violations",
+      "The page title is simply 'Roblox' — impersonating Roblox Corporation (brand abuse), which strengthens a DMCA/trademark takedown request",
+      "Multi-platform takedown complexity: Effective remediation requires reports to Netlify (main site), Cloudflare (zr-dqb.pages.dev image host), AWS/CloudFront (JS and tracking infrastructure), and potentially Roblox Corporation (brand abuse/rbxcdn.com asset misuse)"
+    ],
+    "notable_findings": [
+      "LIVE AND SERVING: The site returned HTTP 200 with 15,012 bytes of content as of 2026-02-07, confirming it is still active and operational",
+      "Domain age is 204 days (~6.8 months) — this scam has persisted for months without being taken down, indicating a detection/reporting gap",
+      "Two A records (13.52.188.95, 52.52.192.191) both in AWS us-west-1 (San Jose, CA) — standard Netlify load-balanced infrastructure",
+      "Two AAAA records (2600:1f1c:446:4900::258, 2600:1f1c:446:4900::259) — IPv6 enabled via AWS",
+      "urlscan.io resolved the site to a DIFFERENT IP (35.157.26.135 in eu-central-1 Frankfurt) vs our dig results (us-west-1 San Jose) — Netlify CDN serves from geographically nearest PoP, confirming global CDN distribution",
+      "No TXT records, no SPF/DKIM — not configured for email (pure web-based scam)",
+      "Netlify Edge cache hit indicates the content is being served from CDN edge cache, not origin — meaning fast delivery worldwide",
+      "histawts.com script (s10.histawts.com/js15_as.js) returned 0 bytes in urlscan — likely geo-fenced or bot-detecting, suggesting the scam operators are using evasive ad/tracking infrastructure",
+      "The rbxcdn.com asset used is specifically the Roblox Premium title background — the scam theme is a fake 'Roblox Premium' generator, one of the most effective lures for the target demographic (children aged 8-16)",
+      "Cloudflare Pages subdomain 'zr-dqb' appears randomly generated — likely a disposable asset host that can be quickly replaced if taken down"
+    ]
+  }
+}

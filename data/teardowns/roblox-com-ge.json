@@ -1,0 +1,323 @@
+{
+  "domain": "roblox.com.ge",
+  "category": "ccTLD_repurposed_discord_oauth",
+  "analysis_date": "2026-02-07",
+  "urlscan_ref": "https://urlscan.io/search/#domain%3Aroblox.com.ge",
+  "url_variants_in_dataset": [
+    "http://roblox.com.ge",
+    "https://roblox.com.ge/communities/1482366779/DONLE",
+    "https://roblox.com.ge/communities/3318370780",
+    "https://roblox.com.ge/communities/8109840268",
+    "https://roblox.com.ge/games/101898538399240/Jump-Into-Dino-Bro?privateServerLinkCode=15693244180733623222221655138361",
+    "https://roblox.com.ge/users/3240895514/profile",
+    "https://roblox.com.ge/users/3567083155/profile",
+    "https://roblox.com.ge/users/3964727128/profile"
+  ],
+  "infrastructure": {
+    "ip_addresses": {
+      "A": ["91.240.21.9"],
+      "AAAA": []
+    },
+    "nameservers": [
+      "ns1.eggywall.cc",
+      "ns2.eggywall.cc"
+    ],
+    "mx_records": [],
+    "txt_records": [],
+    "hosting_provider": "WIBO Baltic UAB",
+    "cdn": "none",
+    "asn": "AS59939",
+    "geolocation": {
+      "city": "Frankfurt am Main",
+      "region": "Hesse",
+      "country": "DE",
+      "org": "AS59939 WIBO Baltic UAB"
+    },
+    "reverse_dns": null,
+    "whois": {
+      "registrar": "domenebi.ge",
+      "created": "2025-08-21",
+      "expires": "2026-08-22",
+      "updated": null,
+      "registrant": "HiddenInWhois (privacy-protected)",
+      "nameservers_whois": [
+        "ns1.eggywall.cc",
+        "ns2.eggywall.cc"
+      ],
+      "status": "HiddenInWhois, Ok",
+      "raw_excerpt": "Domain Name: ROBLOX.COM.GE | Creation Date: 2025-08-21 | Registry Expiry Date: 2026-08-22 | Registrar: domenebi.ge | Domain Status: HiddenInWhois | Domain Status: Ok | Name Server: ns1.eggywall.cc | Name Server: ns2.eggywall.cc"
+    },
+    "tls": {
+      "issuer": "C=US, O=Let's Encrypt, CN=E8",
+      "valid_from": "2025-11-20T13:23:37Z",
+      "valid_to": "2026-02-18T13:23:36Z",
+      "san_list": ["roblox.com.ge"],
+      "serial": "05:a4:f8:cb:f1:45:dc:b3:55:49:a2:df:9d:9e:4e:29:fa:00",
+      "signature_algorithm": "ecdsa-with-SHA384",
+      "key_type": "ECDSA P-256",
+      "days_until_expiry": 11
+    },
+    "http_headers": {
+      "server": "Apache/2.4.52 (Ubuntu)",
+      "status_code": "403 Forbidden",
+      "redirect_chain": [],
+      "security_headers_present": [
+        "Strict-Transport-Security: max-age=604800; includeSubdomains",
+        "Access-Control-Allow-Credentials: true",
+        "Cross-Origin-Opener-Policy: same-origin-allow-popups",
+        "Nel: {\"report_to\":\"network-errors\",\"max_age\":604800,\"success_fraction\":0.1,\"failure_fraction\":1}"
+      ],
+      "security_headers_missing": [
+        "Content-Security-Policy",
+        "X-Content-Type-Options",
+        "X-XSS-Protection",
+        "Referrer-Policy",
+        "Permissions-Policy"
+      ],
+      "cookies": [],
+      "notable_headers": {
+        "Eggy-Wall": "10.0.0",
+        "Abuse": "abuse@eggywall.cc",
+        "X-Frame-Options": "ALLOWALL",
+        "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
+        "Nel": "{\"report_to\":\"network-errors\",\"max_age\":604800,\"success_fraction\":0.1,\"failure_fraction\":1}"
+      }
+    },
+    "crtsh": {
+      "first_seen": "2022-04-29",
+      "total_certs": 28,
+      "cert_history": [
+        {
+          "date": "2022-04-29",
+          "issuer": "Cloudflare Inc ECC CA-3",
+          "cn": "sni.cloudflaressl.com",
+          "san": "*.roblox.com.ge, roblox.com.ge",
+          "note": "Original registration - behind Cloudflare proxy"
+        },
+        {
+          "date": "2022-04-29",
+          "issuer": "Sectigo ECC Domain Validation Secure Server CA",
+          "cn": "*.roblox.com.ge",
+          "san": "*.roblox.com.ge, roblox.com.ge",
+          "note": "Sectigo wildcard cert - full hosting setup"
+        },
+        {
+          "date": "2022-05-02",
+          "issuer": "Let's Encrypt R3",
+          "cn": "roblox.com.ge",
+          "san": "*.roblox.com.ge, roblox.com.ge",
+          "note": "Switched to Let's Encrypt wildcard"
+        },
+        {
+          "date": "2022-05-15",
+          "issuer": "Google Trust Services LLC GTS CA 1P5",
+          "cn": "*.roblox.com.ge",
+          "san": "*.roblox.com.ge, roblox.com.ge",
+          "note": "Brief use of Google Trust Services"
+        },
+        {
+          "date": "2022-05-17",
+          "issuer": "Let's Encrypt R3",
+          "cn": "cpcontacts.roblox.com.ge",
+          "san": "autodiscover, cpanel, cpcalendars, cpcontacts, mail, webdisk, webmail, www",
+          "note": "cPanel-based hosting setup with full subdomain suite (mail, webdisk, cpanel, etc.)"
+        },
+        {
+          "date": "2022-05-17",
+          "issuer": "ZeroSSL RSA Domain Secure Site CA",
+          "cn": "roblox.com.ge",
+          "san": "roblox.com.ge, www.roblox.com.ge",
+          "note": "ZeroSSL cert - likely cPanel auto-generated"
+        },
+        {
+          "date": "2023-07-18",
+          "issuer": "Let's Encrypt R3",
+          "cn": "roblox.com.ge",
+          "san": "ftp, mail, pop, smtp, www + roblox.com.ge",
+          "note": "Full mail infrastructure (smtp, pop, mail) - active Roblox phishing phase"
+        },
+        {
+          "date": "2023-09-16",
+          "issuer": "Let's Encrypt R3",
+          "cn": "ftp.roblox.com.ge",
+          "san": "ftp, mail, pop, smtp, www + roblox.com.ge",
+          "note": "Last cert before ~10 month gap - domain likely expired or went dormant"
+        },
+        {
+          "date": "2024-07-17",
+          "issuer": "Let's Encrypt R10",
+          "cn": "*.roblox.com.ge",
+          "san": "*.roblox.com.ge, roblox.com.ge",
+          "note": "Domain reactivated after ~10 month gap, wildcard cert"
+        },
+        {
+          "date": "2024-07-31",
+          "issuer": "Sectigo ECC Domain Validation Secure Server CA",
+          "cn": "roblox.com.ge",
+          "san": "*.roblox.com.ge, roblox.com.ge",
+          "note": "Sectigo cert again - different operator or hosting change"
+        },
+        {
+          "date": "2024-08-05",
+          "issuer": "Let's Encrypt R10/R11",
+          "cn": "various (pop, mail, ftp, smtp, autodiscover)",
+          "san": "individual subdomains",
+          "note": "Individual certs for mail subdomains - mail infrastructure rebuilt"
+        },
+        {
+          "date": "2024-08-13",
+          "issuer": "Let's Encrypt R10/R11/E5 + Google Trust Services WE1",
+          "cn": "roblox.com.ge",
+          "san": "*.roblox.com.ge, roblox.com.ge",
+          "note": "Multiple cert issuers tested same day - infrastructure migration"
+        },
+        {
+          "date": "2024-08-24",
+          "issuer": "Let's Encrypt R11",
+          "cn": "roblox.com.ge",
+          "san": "roblox.com.ge, www.roblox.com.ge",
+          "note": "Settled on Let's Encrypt for main domain"
+        },
+        {
+          "date": "2024-09-02",
+          "issuer": "Let's Encrypt R10",
+          "cn": "*.roblox.com.ge",
+          "san": "*.roblox.com.ge, roblox.com.ge",
+          "note": "Last cert before second gap - domain expired again Dec 2024"
+        },
+        {
+          "date": "2025-08-21",
+          "issuer": "Let's Encrypt R12",
+          "cn": "roblox.com.ge",
+          "san": "roblox.com.ge",
+          "note": "PIVOT POINT: Domain re-registered same day as WHOIS creation date. No more wildcard/subdomains. Single-domain cert only. New operator."
+        },
+        {
+          "date": "2025-11-20",
+          "issuer": "Let's Encrypt E8",
+          "cn": "roblox.com.ge",
+          "san": "roblox.com.ge",
+          "note": "Current cert - renewed, still single domain. This is the active Vaultcord/Discord OAuth phase."
+        },
+        {
+          "date": "2026-01-27",
+          "issuer": "Let's Encrypt E8",
+          "cn": "fuck.roblox.com.ge",
+          "san": "fuck.roblox.com.ge",
+          "note": "New subdomain 'fuck.roblox.com.ge' - provocative naming, possible test or additional phishing endpoint"
+        }
+      ],
+      "pivot_timeline_notes": "Clear two-phase history: (1) 2022-04-29 to 2024-09-02: Original operator ran full hosting with cPanel, mail (smtp/pop/imap), Cloudflare proxy, wildcard certs, and Roblox phishing content. Infrastructure included cpanel, webmail, ftp, autodiscover subdomains suggesting a shared hosting or VPS with cPanel. (2) After domain expired and ~11 month gap, re-registered 2025-08-21 by new operator via domenebi.ge registrar. New setup uses eggywall.cc nameservers (custom NS suggesting bulletproof/abuse-resistant hosting), Apache on Ubuntu at WIBO Baltic UAB in Frankfurt, single-domain Let's Encrypt certs (no wildcard, no mail infra), and serves Roblox-themed phishing pages that redirect to Vaultcord Discord OAuth. The pivot from full cPanel hosting to streamlined single-purpose phishing proxy is clear."
+    },
+    "vaultcord_infrastructure": {
+      "auth_immortal_rs_ip": "66.33.60.34, 76.76.21.164",
+      "auth_immortal_rs_cname_chain": "customers.vaultcord.com -> cname.vercel-dns.com",
+      "auth_immortal_rs_hosting": "Vercel (Amazon/AWS AS16509)",
+      "vaultcord_win_ip": "104.18.6.59, 104.18.7.59",
+      "vaultcord_win_hosting": "Cloudflare",
+      "same_ip_as_main": false,
+      "notes": "Vaultcord infrastructure is completely separate from the phishing domain. auth.immortal.rs CNAMEs to customers.vaultcord.com which resolves via Vercel DNS to AWS anycast IPs (Walnut, CA). vaultcord.win is behind Cloudflare (104.18.x.x). The phishing domain (91.240.21.9 / WIBO Baltic) serves Roblox-lookalike pages that contain JavaScript redirecting victims to auth.immortal.rs for Discord OAuth token theft. This separation means the phishing lure infrastructure and the credential harvesting infrastructure are operated independently -- Vaultcord is a service provider (verification-as-a-service) and the phishing domain operator is a customer."
+    },
+    "eggywall_infrastructure": {
+      "nameservers": ["ns1.eggywall.cc", "ns2.eggywall.cc"],
+      "abuse_contact": "abuse@eggywall.cc",
+      "custom_header": "Eggy-Wall: 10.0.0",
+      "notes": "Eggywall appears to be a hosting/proxy service (possibly bulletproof or abuse-tolerant) that provides custom nameservers and injects its own HTTP headers. The 'Eggy-Wall: 10.0.0' version header and abuse@eggywall.cc contact suggest a branded infrastructure service. The .cc TLD (Cocos Islands) is commonly used by operators seeking to avoid takedowns. X-Frame-Options: ALLOWALL is deliberately permissive, allowing the phishing content to be embedded in iframes on other sites."
+    }
+  },
+  "domain_lifecycle": {
+    "original_purpose": "Roblox ccTLD typosquat (roblox.com under .ge Georgia TLD) with full hosting infrastructure including cPanel, mail servers (smtp/pop/imap), FTP, and webmail",
+    "current_purpose": "Discord OAuth credential theft via Vaultcord service - domain serves Roblox-themed lure pages (games, user profiles, communities) that redirect to auth.immortal.rs for Discord OAuth token capture",
+    "pivot_evidence": "WHOIS shows creation date 2025-08-21 (re-registration) while crt.sh shows original certs from 2022-04-29. The original 2022-2024 operator had cPanel hosting with mail infrastructure (autodiscover, cpanel, cpcalendars, cpcontacts, mail, webdisk, webmail, smtp, pop, ftp subdomains) behind Cloudflare. After domain expired (~Dec 2024), a new operator re-registered it on 2025-08-21 via domenebi.ge with eggywall.cc nameservers, no mail infrastructure, no wildcard certs, and pointing to WIBO Baltic UAB hosting in Frankfurt. The content shifted from direct Roblox phishing to Roblox-themed lure pages serving as a funnel to Vaultcord Discord OAuth theft.",
+    "timeline": {
+      "original_registration": "~2022-04-29 (first cert in CT logs)",
+      "domain_registered_current": "2025-08-21 (WHOIS creation date, re-registration)",
+      "first_cert": "2022-04-29 (Cloudflare Inc ECC CA-3 / Sectigo)",
+      "first_cert_current_operator": "2025-08-21 (Let's Encrypt R12)",
+      "current_cert": "2025-11-20 to 2026-02-18 (Let's Encrypt E8)",
+      "phase1_roblox_phishing_cPanel": "2022-04-29 to ~2023-12-15 (original operator, cPanel + mail infra)",
+      "dormant_gap_1": "2023-12-15 to 2024-07-17 (~7 months dormant)",
+      "phase2_roblox_phishing_revived": "2024-07-17 to ~2024-12-01 (revived, possibly same or different operator)",
+      "dormant_gap_2": "2024-12-01 to 2025-08-21 (~9 months dormant, domain expired)",
+      "phase3_discord_oauth_vaultcord": "2025-08-21 to present (new operator, eggywall NS, Vaultcord integration)",
+      "content_change_estimated": "2025-08-21 (re-registration date matches first cert from new operator)",
+      "newest_subdomain": "2026-01-27 (fuck.roblox.com.ge cert issued)"
+    }
+  },
+  "urlscan_findings": {
+    "total_results": 3755,
+    "source": "openphish (automatic submissions) + manual API submissions",
+    "sample_pages": [
+      {
+        "url": "https://roblox.com.ge/games/8737602449/PLS-DONATE?privateServerLinkCode=40066486994763012966569223720364",
+        "title": "PLS DONATE - Roblox",
+        "status": 200,
+        "requests": 255,
+        "note": "Game page lure - PLS DONATE is a popular Roblox game, privateServerLinkCode parameter adds legitimacy"
+      },
+      {
+        "url": "https://roblox.com.ge/users/8606159187/profile",
+        "title": "Voxi - Roblox",
+        "status": 200,
+        "requests": 261,
+        "note": "User profile page lure"
+      },
+      {
+        "url": "https://roblox.com.ge/communities/5170862159/",
+        "title": "Probloxstudio - Roblox",
+        "status": 200,
+        "requests": 195,
+        "note": "Community page lure"
+      },
+      {
+        "url": "https://roblox.com.ge/games/81336730968703/Your-Neko-Myla?privateServerLinkCode=12913375013152140411407568208791",
+        "title": "Your Neko Myla- Roblox",
+        "status": 200,
+        "requests": 224,
+        "note": "Redirected from is.gd URL shortener - uses short link distribution"
+      }
+    ],
+    "domain_age_days_reported": 1379,
+    "domain_age_note": "urlscan reports 1379 days which calculates back to ~2022-04-28, consistent with the first CT log entry (2022-04-29). This is the age from original registration, not the 2025-08-21 re-registration shown in current WHOIS."
+  },
+  "attack_flow": {
+    "step1_lure": "Victim receives link to roblox.com.ge URL (game page, user profile, or community) distributed via Discord messages, social media, or URL shorteners (is.gd observed)",
+    "step2_landing": "Domain serves convincing Roblox-themed page (title matches real Roblox page titles like 'PLS DONATE - Roblox') with 200-270 HTTP requests loading assets to appear legitimate",
+    "step3_redirect": "Page contains JavaScript that redirects user to auth.immortal.rs (Vaultcord customer portal) for Discord OAuth authorization",
+    "step4_oauth_theft": "auth.immortal.rs presents Discord OAuth consent screen requesting permissions (likely guilds.join, identify, email scopes) - victim authorizes thinking it's Roblox verification",
+    "step5_token_capture": "Vaultcord captures the Discord OAuth token/refresh token, giving the attacker persistent access to the victim's Discord account, ability to join servers on their behalf, and access to personal information"
+  },
+  "interview_notes": {
+    "security_concepts": [
+      "Domain lifecycle analysis: Phishing infrastructure is not static -- domains get registered, used, abandoned, re-registered, and repurposed. This domain went through 3 distinct phases across 2+ operators over 4 years.",
+      "ccTLD abuse: .ge (Georgia) is used as a ccTLD_append attack (roblox.com + .ge), exploiting that roblox.com.ge looks like a subdomain of roblox.com to untrained eyes. This is part of the 67.4% ccTLD_append pattern observed across the dataset.",
+      "OAuth scope abuse: Vaultcord uses Discord's OAuth2 flow to steal tokens. The authorization request likely includes scopes like guilds.join (add victim to attacker servers), identify (get user info), and email. Victims see a real Discord consent screen, making the attack feel legitimate.",
+      "Infrastructure separation: The phishing lure (roblox.com.ge on WIBO Baltic) and credential harvesting (auth.immortal.rs on Vercel/AWS) use completely separate infrastructure, making takedown harder -- killing one doesn't kill the other.",
+      "Bulletproof hosting indicators: eggywall.cc custom nameservers, WIBO Baltic UAB hosting, .cc TLD for infrastructure, X-Frame-Options: ALLOWALL, and HiddenInWhois status all suggest deliberate abuse-resistant hosting choices.",
+      "Certificate transparency as investigation tool: crt.sh reveals the complete domain history including operator changes, infrastructure pivots, and dormancy periods that WHOIS alone cannot show (WHOIS only shows the most recent registration).",
+      "Verification-as-a-service: Vaultcord (vaultcord.win / customers.vaultcord.com) is a commercial service that provides Discord OAuth token theft capability to customers. The phishing domain operator is a Vaultcord customer, not the service operator. This is cybercrime-as-a-service.",
+      "NEL (Network Error Logging) header: The presence of NEL reporting suggests the operator monitors network errors and delivery success rates, indicating operational sophistication."
+    ],
+    "talking_points": [
+      "This domain tells a complete story of phishing infrastructure evolution: original Roblox phishing with full cPanel hosting (2022) -> dormancy -> revival (2024) -> expiration -> re-registration by new operator for Discord OAuth theft (2025). The .ge ccTLD domain was attractive enough to be re-registered after expiry.",
+      "The 403 Forbidden on the bare domain but 200 OK on path-based URLs (from urlscan) suggests the server uses path-based routing -- it only serves content for specific Roblox-mimicking URL patterns (/games/, /users/, /communities/) and blocks direct access, which is an anti-analysis technique.",
+      "The Eggy-Wall header (v10.0.0) and custom NS infrastructure suggest a branded hosting/proxy service purpose-built for phishing operations. This is infrastructure-as-a-service for phishing, not a one-off setup.",
+      "WHOIS 'HiddenInWhois' status at the .ge registry level means the registrant data is fully suppressed -- more opaque than typical GDPR redaction seen in gTLD WHOIS.",
+      "The cert for 'fuck.roblox.com.ge' (2026-01-27) shows the operator is still actively developing the infrastructure and adding new subdomains, potentially for additional attack vectors or testing.",
+      "URL shortener usage (is.gd redirecting to roblox.com.ge) adds another layer of indirection that complicates detection and makes links look less suspicious in Discord messages.",
+      "The 3,755 urlscan results (source: openphish) indicate this domain has massive scale -- it's not a targeted attack but a broad credential harvesting campaign."
+    ],
+    "notable_findings": [
+      "Domain has been through 3 operators/phases over 4 years (2022-2026), showing how phishing domains get recycled",
+      "Current WHOIS creation date (2025-08-21) mismatches first CT cert (2022-04-29) by 3+ years -- proving the domain was re-registered, not continuously held",
+      "Original operator had full cPanel infrastructure (cpanel, webmail, autodiscover, ftp, smtp, pop, mail subdomains) suggesting shared hosting or VPS",
+      "Current operator uses eggywall.cc custom nameservers and WIBO Baltic UAB hosting -- a completely different infrastructure stack from the original Cloudflare/cPanel setup",
+      "X-Frame-Options: ALLOWALL is deliberately insecure -- allows phishing pages to be embedded in iframes, useful for credential harvesting overlays",
+      "No MX/TXT records means no email or SPF/DKIM -- the current operator has no interest in email, only web-based OAuth phishing",
+      "TLS cert expires 2026-02-18 (11 days from analysis) -- if not renewed, the HTTPS phishing pages will show certificate warnings",
+      "auth.immortal.rs CNAMEs to customers.vaultcord.com -> Vercel -- Vaultcord uses legitimate cloud infrastructure (Vercel) making it harder to block at the IP level",
+      "3,755 urlscan results flagged by OpenPhish demonstrate the domain is well-known to threat intelligence feeds but remains operational",
+      "The domain serves different Roblox page types (games with privateServerLinkCode, user profiles, communities) suggesting automated content generation mimicking the real roblox.com URL structure"
+    ]
+  }
+}
