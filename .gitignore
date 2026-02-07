@@ -1,0 +1,4 @@
+plan.md
+data/raw/
+__pycache__/
+data/samples_raw.json
