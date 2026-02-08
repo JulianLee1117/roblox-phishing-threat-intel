@@ -317,7 +317,7 @@ The `.ROBLOSECURITY` cookie is a post-authentication session token. Once a user 
 
 ### Why it matters for Roblox specifically
 
-- **65M+ DAU, 50%+ under 13** -- a vulnerable user population with limited security awareness
+- **151M+ DAU, 50%+ under 13** -- a vulnerable user population with limited security awareness
 - **Virtual economy with real value** -- Robux and limited items have real-money value; account takeover means financial loss for minors
 - **2FA is bypassed** -- the cookie is post-authentication, making 2FA insufficient as a standalone defense
 
