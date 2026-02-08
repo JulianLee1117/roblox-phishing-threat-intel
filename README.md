@@ -1,6 +1,6 @@
 # Roblox Phishing Threat Intelligence
 
-Independent security research analyzing phishing threats targeting Roblox's 65M+ daily active users. Built a collection pipeline across 7 threat intelligence sources, gathered 1,999 phishing URLs, and performed deep infrastructure and content analysis on 5 live domains across 4 attack categories.
+Independent security research analyzing phishing threats targeting Roblox's 151M+ daily active users. Built a collection pipeline across 7 threat intelligence sources, gathered 1,999 phishing URLs, and performed deep infrastructure and content analysis on 5 live domains across 4 attack categories.
 
 ## Key Findings
 
