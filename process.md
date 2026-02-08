@@ -286,3 +286,54 @@ Tracks decisions, results, and notes as we execute the plan.
 - **OPSEC leaks found on 3/5 domains** — Polish comments on roblox-com.pl, Chinese comment + "Font Changer" template leak on delta-executor.club, operator alias "amjad" hardcoded on rbux4aall.
 - **Vercel.app passive visitor beacon is unique** — sends IP + user-agent + URL to Discord webhook on *every page load*, not just form submission. Attacker gets visitor analytics even from suspicious users who don't enter credentials.
 - **roblox.com.ge is the most sophisticated** — live reverse proxy to real roblox.com with minimal injection (3 elements), client-capability cloaking, and interaction-triggered redirect (not automatic). Exploits real Roblox UX patterns ("Join Experience" button).
+
+---
+
+## Phase 3: Write THREAT_BRIEF.md + Interview Prep — COMPLETE (Feb 7, 2026)
+
+### What was produced
+
+| File | Size | Description |
+|------|------|-------------|
+| `THREAT_BRIEF.md` | ~22 KB | Primary deliverable — full threat brief with 5 domain teardowns, cross-cutting patterns, .ROBLOSECURITY context, detection recommendations, and NIST-structured takedown playbook |
+| `README.md` | ~3 KB | Rewritten with project narrative, key findings, repo structure, data sources, ethical considerations |
+| `process.md` | Updated | This entry — Phase 3 execution log |
+
+### Structure of THREAT_BRIEF.md
+
+1. **Executive Summary** — scale, what was analyzed, key findings, why it matters
+2. **Methodology** — collection pipeline (7 sources, 1,999 URLs), pivot story, analysis approach, ethical constraints
+3. **Dataset Overview** — category breakdown, .com.kz concentration, lure type distribution, active/dead rates
+4. **Domain Teardowns (5)** — each with infrastructure table, attack mechanics, notable findings, security concepts
+5. **Cross-Cutting Patterns** — attack technique comparison matrix, 7 key observations
+6. **.ROBLOSECURITY Cookie Theft** — honestly framed as desk research; what the cookie is, 6 known vectors, Roblox's response, security concepts it connects to
+7. **Detection & Defense Recommendations** — 6 actionable items
+8. **Incident Response: Takedown Playbook** — NIST IR lifecycle (Detect → Contain & Eradicate → Recover & Lessons Learned)
+9. **Appendix: Data Sources** — all sources with URLs
+
+### Decisions made
+
+1. **Merged old Phases 3-5 into one phase** — campaign clustering across 5 intentionally diverse domains would produce a matrix proving they're unrelated, which isn't a finding. The remaining work was synthesis, writing, and interview prep.
+2. **.ROBLOSECURITY section honestly framed** — labeled as "desk research providing complementary context," not claimed as a teardown finding. Connected back to project findings (delta-executor distributes malware that could include cookie stealers).
+3. **IR playbook uses NIST framework language** — Detect → Contain & Eradicate → Recover & Lessons Learned. Adds expected response times per domain type. References specific findings (roblox-com.pl incomplete takedown, delta-executor 9-day deployment speed).
+4. **All numbers verified against real data** — ran dataset queries (Part A) before writing. Every statistic in the threat brief traces to `data/samples.json` or the 5 teardown JSONs.
+5. **Interview prep materials in alternate-plan.md** — the 2-minute pitch, 3 deep-dive walkthroughs, and quick-reference topic-answer map were pre-drafted in the plan and remain there as the interview preparation reference.
+
+### Interview prep materials (in alternate-plan.md Part D)
+
+- **2-minute pitch** covering: threat model (65M+ DAU, 50%+ under 13), collection (7 sources, 1,999 URLs), pivot story (84% skew), deep analysis (5 domains, 4 categories), key findings (3/5 runtime JS injection, modular supply chain), .ROBLOSECURITY context, deliverables
+- **3 deep-dive walkthrough examples:**
+  1. roblox.com.ge — reverse proxy injection + domain lifecycle (most surprising/technical)
+  2. vercel-app — dual Discord webhook + anti-analysis (most accessible to explain)
+  3. .ROBLOSECURITY context — cookie theft as complementary vector (broadest security knowledge)
+- **Quick-reference topic-answer map** covering all 7 interview rubric topics (security curiosity, web app vulns, how devs prevent, least privilege, phishing, incident response, encryption)
+
+### Verification checklist
+
+- [x] `THREAT_BRIEF.md` has zero placeholder numbers — all stats from real data
+- [x] Every teardown finding maps to at least one interview topic
+- [x] .ROBLOSECURITY section honestly framed as desk research
+- [x] README.md tells the pivot story with real numbers
+- [x] 2-minute pitch references specific findings (in alternate-plan.md)
+- [x] 3 deep-dive examples prepared (in alternate-plan.md)
+- [x] Topic-answer map covers all interview rubric items (in alternate-plan.md)
